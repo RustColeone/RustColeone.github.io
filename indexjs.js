@@ -52,10 +52,8 @@ for (i = 0; i < coll.length; i++) {
     });
 }
 
-var jsonRequest = new XMLHttpRequest();
-jsonRequest.open("GET", "directory.json", false);
-jsonRequest.send(null)
-var directory = JSON.parse(request.responseText);
+var data = require('https://rustcoleone.github.io/directory.json'); //(with path)
+console.log(data);
 var string ="";
 for (i in data) {
 string +='<div class="row"> <div class="col-xs-5"><span class="name">'+data[i].name+'</span></div><div class="col-xs-2"></div><div class="col-xs-5"><input type="number" class="percentage">'+data[i].percentage+'</div></div>';
