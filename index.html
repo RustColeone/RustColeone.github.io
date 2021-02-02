@@ -1,1 +1,69 @@
-Hello World
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    <link rel="stylesheet" href="indexcss.css">
+</head>
+<body>
+
+    <div class="header" id="header">
+        <h1>Learn</h1>
+        <p>Website hosted on Github for learning</p>
+    </div>
+
+    <div class="topnav">
+        <a href="#Subject1">Subject 1</a>
+        <a href="#Subject2">Subject 2</a>
+        <a href="#Subject3">Subject 3</a>
+        <a onclick="darkMode()">Dark Mode</a>
+        <a href="#Information" style="float:right">Info</a>
+    </div>
+
+    <div class="row">
+        <div class="leftcolumn">
+            <div class="card" id="Subject1">
+                <h2 class="Title">Subject Title Here</h2>
+                <h5 class="SubTitle">Subject SubTitle Here</h5>
+                <button type="button" class="collapsible">Details</button>
+                <div class="content">
+                    <p class="Details">Details Here</p>
+                </div>
+            </div>
+        </div>
+        <div class="rightcolumn">
+            <div class="card">
+                <h3>Resources</h3>
+                <div class="fakeimg" style="margin-bottom:10px; padding-top:1px">
+                    <p>Quick Resources are listed here</p>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Info</h3>
+                <div class="fakeimg" style="margin-bottom:10px; padding-top:1px">
+                    <p>There's nothing here to see</p>
+                </div>
+                <div class="fakeimg" style="margin-bottom:10px; padding-top:1px">
+                    <p>This is just getting started</p>
+                </div>
+                <div class="fakeimg" style="margin-bottom:0px; padding-top:1px">
+                    <p>Maybe when we are all done with exams?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h2><a href="#header" style="text-decoration: none;">Back to Top</a></h2>
+    </div>
+    <div id="json"></div>
+</body>
+
+
+<script type="text/javascript" src="directory.json"></script>
+<script type="text/javascript" src="indexjs.js"></script>
+
+</script>
+</html>
