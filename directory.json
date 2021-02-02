@@ -1,5 +1,5 @@
 [
-    {"subjectTitle":"Subject 1", "subtitle":"subtitle1", "details":"Details1", "link":"google.com"},
-    {"subjectTitle":"Subject 2", "subtitle":"subtitle2", "details":"Details2", "link":"google.com"},
-    {"subjectTitle":"Subject 3", "subtitle":"subtitle3", "details":"Details3", "link":"google.com"}
+    {"subjectTitle":"Subject 1", "subtitle":"subtitle1", "details":"Details1", "link":"http://google.com"},
+    {"subjectTitle":"Subject 2", "subtitle":"subtitle2", "details":"Details2", "link":"http://google.com"},
+    {"subjectTitle":"Subject 3", "subtitle":"subtitle3", "details":"Details3", "link":"http://google.com"}
 ]
