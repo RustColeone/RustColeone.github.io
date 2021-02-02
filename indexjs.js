@@ -4,14 +4,14 @@ function darkMode(){
     if(document.querySelectorAll('h1')[0].style.color == "gray"){
         textColor = "black"
         console.log("turn to white")
-        document.body.style.backgroundColor="white";
+        document.body.style.backgroundColor="#f1f1f1";
         document.querySelectorAll(".card").forEach(e => e.style.backgroundColor = "white");
         document.querySelectorAll(".collapsible").forEach(e => e.style.backgroundColor = "#eeeeee");
         document.querySelectorAll(".fakeimg").forEach(e => e.style.backgroundColor = "#eeeeee");
         document.querySelectorAll(".content").forEach(e => e.style.backgroundColor = "#f1f1f1");
-        document.querySelectorAll(".header").forEach(e => e.style.backgroundColor = "#dddddd");
-        document.querySelectorAll(".row").forEach(e => e.style.backgroundColor = "#dddddd");
-        document.querySelectorAll(".rightcolumn").forEach(e => e.style.backgroundColor = "#dddddd");
+        document.querySelectorAll(".header").forEach(e => e.style.backgroundColor = "white");
+        document.querySelectorAll(".row").forEach(e => e.style.backgroundColor = "#f1f1f1");
+        document.querySelectorAll(".rightcolumn").forEach(e => e.style.backgroundColor = "#f1f1f1");
         document.querySelectorAll(".footer").forEach(e => e.style.backgroundColor = "#dddddd");
     }
     else{
@@ -36,26 +36,49 @@ function darkMode(){
     document.querySelectorAll('button').forEach(e => e.style.color = textColor);
     document.querySelectorAll('p').forEach(e => e.style.color = textColor);
 }
+function makeCollisible(){
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
 
-var coll = document.getElementsByClassName("collapsible");
-var i;
-
-for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-    content.style.display = "none";
-    } else {
-    content.style.display = "block";
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+        content.style.display = "none";
+        } else {
+        content.style.display = "block";
+        }
+        });
     }
-    });
 }
 
-var data = require('https://rustcoleone.github.io/directory.json'); //(with path)
-console.log(data);
-var string ="";
-for (i in data) {
-string +='<div class="row"> <div class="col-xs-5"><span class="name">'+data[i].name+'</span></div><div class="col-xs-2"></div><div class="col-xs-5"><input type="number" class="percentage">'+data[i].percentage+'</div></div>';
-};
-document.getElementById('json').innerHTML =string
+function postData(){
+    fetch("https://rustcoleone.github.io/directory.json")
+    .then(response => response.json())
+    .then(directoryData => {
+            console.log(directoryData)
+            data = directoryData;
+            var navpanel = "";
+            var leftStr = "";
+            for (i in data) {
+                navpanel += '<a href="#Subject' + i + '">' + data[i].subjectTitle + '</a>'
+
+                leftStr+= '<div class="card" id="Subject' + i + '">'
+                        + '<h2 class="Title">' + data[i].subjectTitle + '</h2>'
+                        + '<h5 class="SubTitle">' + data[i].subtitle + '</h5>'
+                        + '<button type="button" class="collapsible">Details</button>'
+                        + '<div class="content">'
+                        +     '<p class="Details">' + data[i].details + '</p>'
+                        +     '<a href="' + data[i].link + '">Click for more</a>'
+                        + '</div>'
+                        + '</div>'
+            };
+            document.getElementById("navpanel").innerHTML += navpanel;
+            document.getElementById('leftcolumn').innerHTML += leftStr;
+            makeCollisible()
+        }
+    );
+}
+postData();
+makeCollisible()

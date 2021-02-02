@@ -14,16 +14,14 @@
         <p>Website hosted on Github for learning</p>
     </div>
 
-    <div class="topnav">
-        <a href="#Subject1">Subject 1</a>
-        <a href="#Subject2">Subject 2</a>
-        <a href="#Subject3">Subject 3</a>
+    <div class="topnav" id = "navpanel">
         <a onclick="darkMode()">Dark Mode</a>
         <a href="#Information" style="float:right">Info</a>
     </div>
 
     <div class="row">
-        <div class="leftcolumn">
+        <div class="leftcolumn" id = "leftcolumn">
+            <!-- template of one subject card
             <div class="card" id="Subject1">
                 <h2 class="Title">Subject Title Here</h2>
                 <h5 class="SubTitle">Subject SubTitle Here</h5>
@@ -32,6 +30,7 @@
                     <p class="Details">Details Here</p>
                 </div>
             </div>
+            -->
         </div>
         <div class="rightcolumn">
             <div class="card">
@@ -58,12 +57,11 @@
     <div class="footer">
         <h2><a href="#header" style="text-decoration: none;">Back to Top</a></h2>
     </div>
-    <div id="json"></div>
 </body>
 
-
+<script type="text/javascript" src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
 <script type="text/javascript" src="directory.json"></script>
 <script type="text/javascript" src="indexjs.js"></script>
 
-</script>
+<script> makeCollisible(); </script>
 </html>
