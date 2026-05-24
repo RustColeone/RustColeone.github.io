@@ -5,50 +5,112 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="HandheldFriendly" content="true">
+    <title>RustColeone — Projects</title>
     <link rel="stylesheet" href="indexcss.css">
 </head>
 <body>
 
     <div class="header" id="header">
-        <h1>Learn</h1>
-        <p>Website hosted on Github for learning</p>
+        <h1>RustColeone</h1>
+        <p>Building things I want to use</p>
     </div>
 
-    <div class="topnav" id = "navpanel">
-        <a onclick="darkMode()">Dark Mode</a>
-        <a href="#Information" style="float:right">Info</a>
+    <div class="topnav" id="navpanel">
+        <a href="#projects">Projects</a>
+        <a href="#plans">Plans</a>
+        <a onclick="darkMode()" style="float:right; cursor:pointer">Dark Mode</a>
     </div>
 
-    <div class="row">
-        <div class="leftcolumn" id = "leftcolumn">
-            <!-- template of one subject card
-            <div class="card" id="Subject1">
-                <h2 class="Title">Subject Title Here</h2>
-                <h5 class="SubTitle">Subject SubTitle Here</h5>
-                <button type="button" class="collapsible">Details</button>
+    <div class="row" id="projects">
+        <div class="leftcolumn">
+
+            <!-- ImageDB -->
+            <div class="card" id="imagedb">
+                <h2 class="Title">ImageDB</h2>
+                <h5 class="SubTitle">Local-first image vault &nbsp;·&nbsp; Android + Web</h5>
+                <p>A private, searchable image database where you own every byte. Import images, label them with captions, albums, and free-form tags, then search and browse them completely offline — no accounts, no cloud, no uploads to third-party servers.</p>
+
+                <button type="button" class="collapsible">Features</button>
                 <div class="content">
-                    <p class="Details">Details Here</p>
+                    <p><strong>Organising</strong> — Albums, free-form tags with autocomplete drawn from every tag ever used, captions, and live full-text search across captions and tags. Filter the feed by one or more tags, file type (GIF vs still), or album. A Tag Manager lets you rename or delete tags globally.</p>
+                    <p><strong>Adding images</strong> — FAB button, hold-for-camera (0.5 s hold with ring animation), drag &amp; drop onto the drop zone, paste from clipboard (Ctrl+V), receive from the Android share sheet, or batch import wizard. The batch wizard lets you set caption, album, and tags per image and supports bulk-editing shared fields across the whole batch.</p>
+                    <p><strong>Viewing</strong> — Responsive masonry grid (2–4+ columns). GIF files get a badge. Long-press or right-click a card for a context menu. Detail view is a swipeable card — swipe left/right to navigate to adjacent images with a ghost preview sliding in from the side. Lightbox with scroll-to-zoom, pinch-to-zoom, double-tap, and drag-to-pan. Pinch outward on the thumbnail in the detail view to transition directly into the lightbox.</p>
+                    <p><strong>Editing &amp; actions</strong> — Edit metadata, delete (single or multi-select), copy to clipboard (native Android <code>content://</code> URI via FileProvider), save to phone, share via system sheet, crop &amp; share. Crop supports animated GIF output for GIFs (using gifenc). Multi-select mode with select-all, invert, delete, and batch-edit actions.</p>
+                    <p><strong>Data portability</strong> — Export the entire vault as a ZIP (images, thumbnails, and a JSON metadata file). Import ZIP is merge-safe and idempotent — entries with the same ID are skipped, so re-importing never duplicates blobs.</p>
+                    <p><strong>Appearance</strong> — Dark/light mode toggle. Warm dark theme by default. Setting persists across sessions.</p>
+                </div>
+
+                <button type="button" class="collapsible">Storage Architecture</button>
+                <div class="content">
+                    <p>Images and thumbnails live in a layered blob store: Capacitor filesystem on Android (app-private, invisible to the gallery), OPFS on modern browsers (Chrome 102+, Firefox 111+, Safari 15.2+), and IndexedDB as a legacy fallback. On upgrade, blobs migrate transparently from IndexedDB to OPFS.</p>
+                    <p>Metadata, the hashbook, and settings are stored in SQLite compiled to WebAssembly via sql.js. The database file is persisted to OPFS after every write via a debounced 150 ms flush. SHA-256 deduplication (via <code>crypto.subtle.digest</code>) maps every image hash to a blob ID — importing the same file twice reuses the existing blob.</p>
+                    <p>Storage layout: <code>images/&lt;blobId&gt;.&lt;ext&gt;</code>, <code>thumbs/&lt;blobId&gt;.jpg</code>, <code>imagedb.sqlite</code>.</p>
+                </div>
+
+                <button type="button" class="collapsible">Tech &amp; Native Plugins</button>
+                <div class="content">
+                    <p><strong>Frontend</strong> — Single HTML file, no build step. HTML, CSS, and JavaScript all co-located. <code>www/index.html</code> is a generated artefact stamped with the version from <code>package.json</code>.</p>
+                    <p><strong>Native shell</strong> — Capacitor for Android. Two custom Java plugins extend the bridge:</p>
+                    <p>&nbsp;&nbsp;<strong>ClipboardImagePlugin</strong> — Writes a full-resolution image to the Android clipboard as a <code>content://</code> URI backed by FileProvider, so other apps (WhatsApp, Telegram, etc.) can paste actual pixels rather than a data URL.</p>
+                    <p>&nbsp;&nbsp;<strong>SharePlugin</strong> — Captures images shared into ImageDB from other apps. Exposes <code>getPendingShare()</code> to JS, which returns the image base64-encoded so the entry dialog opens with it pre-loaded.</p>
+                    <p><strong>Libraries</strong> — sql.js 1.10.3 (SQLite/WASM), fflate 0.8.2 (ZIP compress/decompress), gifenc 1.0.3 (animated GIF crop export), Capacitor filesystem, camera, share, clipboard, and app plugins.</p>
+                </div>
+
+                <p style="margin-top:16px;"><a href="imagedb-privacy.html">Privacy Policy</a></p>
+            </div>
+
+            <!-- DoraemonDB -->
+            <div class="card" id="doraemondb">
+                <h2 class="Title">DoraemonDB</h2>
+                <h5 class="SubTitle">Manga panel search engine &nbsp;·&nbsp; Python + Flask</h5>
+                <p>A local full-text and semantic search engine over a scanned Doraemon manga collection. 61,565 panels extracted from ZIP archives, OCR'd with PaddleOCR, enriched with AI-generated semantic tags, and embedded with a local language model — all served through a Flask web UI running entirely on your own machine.</p>
+
+                <button type="button" class="collapsible">Pipeline</button>
+                <div class="content">
+                    <p><strong>1. Panel extraction</strong> — <code>extract_storyboards.py</code> reads every manga page from ZIP archives, runs flood-fill/contour analysis to detect individual panels, then PaddleOCR to extract Chinese text. Results go into SQLite: source path, page name, panel index, OCR text, and the path inside the ZIP for image serving.</p>
+                    <p><strong>2. DB migration</strong> — <code>migrate_add_tags.py</code> adds <code>tags</code>, <code>tags_model</code>, <code>embedding</code>, and <code>embedding_model</code> columns to the panels table and creates the <code>tag_vocab</code> global tag vocabulary. Safe to re-run (idempotent).</p>
+                    <p><strong>3. Tag enrichment</strong> — <code>enrich_tags.py</code> calls DeepSeek Chat (<code>deepseek-chat</code>) for each un-tagged panel to produce 5–15 candidate Chinese semantic tags (e.g. 哭泣, 大雄, 道具). Each candidate is deduplicated against the global <code>tag_vocab</code> using BAAI/bge-m3 cosine similarity at a 0.90 threshold — close matches reuse the canonical vocab tag; new ones are added. Requires <code>DEEPSEEK_API_KEY</code>.</p>
+                    <p><strong>4. Embedding build</strong> — <code>build_embeddings.py</code> encodes every panel into a 1024-dim float32 vector using BAAI/bge-m3 (sentence-transformers) and stores it as a BLOB. Embedding source priority: canonical tags if available, otherwise raw OCR text. One-time offline step (~60 min on CPU for 61k panels).</p>
+                </div>
+
+                <button type="button" class="collapsible">Search Server &amp; Scoring</button>
+                <div class="content">
+                    <p>Flask server at <code>localhost:5051</code>. On first request it loads all embedding BLOBs into a numpy float32 matrix in memory (~10 min refresh) and caches the tag vocabulary (~5 min refresh).</p>
+                    <p>The unified search endpoint (<code>/api/search/unified</code>) combines three modes, each contributing a normalised 0–1 score per panel:</p>
+                    <p>&nbsp;&nbsp;<strong>词 (keywords)</strong> — always-on; <code>matched_terms / total_terms</code> against OCR text.</p>
+                    <p>&nbsp;&nbsp;<strong>意 (vector)</strong> — cosine similarity via dot product on L2-normalised bge-m3 embeddings. Default ON.</p>
+                    <p>&nbsp;&nbsp;<strong>AI (semantic)</strong> — DeepSeek Chat maps the query to vocab tags; <code>matched_query_tags / total_query_tags</code>. Default OFF.</p>
+                    <p>Combined score = sum of active method scores, normalised to 0–100% by the number of active methods. Results sorted descending. Negative exclusions (<code>-term</code>) work across all methods.</p>
+                </div>
+
+                <button type="button" class="collapsible">Search UI</button>
+                <div class="content">
+                    <p>Single-page app, no build step. Search row with text input, regex toggle (<code>.*</code>), and search button. Filter row with 意 (vector, default ON), AI (DeepSeek semantic, default OFF), series dropdown, and character-count filter. 词 (keywords) is always-on but hidden.</p>
+                    <p>Result cards show extracted text, tag chips (matched tags highlighted), and a score badge: <code>75% 词82·意60</code> for unified mode, <code>完全匹配</code> for exact phrase, <code>相似 XX%</code> for vector-only. Lightbox with crop and copy-to-clipboard support.</p>
                 </div>
             </div>
-            -->
+
         </div>
         <div class="rightcolumn">
-            <div class="card">
-                <h3>Resources</h3>
+            <div class="card" id="plans">
+                <h3>Plans</h3>
                 <div class="fakeimg" style="margin-bottom:10px; padding-top:1px">
-                    <p>Quick Resources are listed here</p>
+                    <p><strong>ImageDB</strong></p>
+                    <p>iOS support via Capacitor. Better GIF handling in the lightbox.</p>
+                </div>
+                <div class="fakeimg" style="margin-bottom:10px; padding-top:1px">
+                    <p><strong>DoraemonDB</strong></p>
+                    <p>GPU-accelerated embedding for faster index builds. Better panel detection for double-page spreads.</p>
+                </div>
+                <div class="fakeimg" style="margin-bottom:0px; padding-top:1px">
+                    <p><strong>This site</strong></p>
+                    <p>More projects as they happen.</p>
                 </div>
             </div>
             <div class="card">
-                <h3>Info</h3>
-                <div class="fakeimg" style="margin-bottom:10px; padding-top:1px">
-                    <p>There's nothing here to see</p>
-                </div>
-                <div class="fakeimg" style="margin-bottom:10px; padding-top:1px">
-                    <p>This is just getting started</p>
-                </div>
+                <h3>About</h3>
                 <div class="fakeimg" style="margin-bottom:0px; padding-top:1px">
-                    <p>Maybe when we are all done with exams?</p>
+                    <p>I build tools I want to exist. Most of them are local-first and offline-capable.</p>
                 </div>
             </div>
         </div>
@@ -57,11 +119,9 @@
     <div class="footer">
         <h2><a href="#header" style="text-decoration: none;">Back to Top</a></h2>
     </div>
+
 </body>
 
-<script type="text/javascript" src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
-<script type="text/javascript" src="directory.json"></script>
 <script type="text/javascript" src="indexjs.js"></script>
-
 <script> makeCollisible(); </script>
 </html>

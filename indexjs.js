@@ -53,32 +53,4 @@ function makeCollisible(){
     }
 }
 
-function postData(){
-    fetch("https://rustcoleone.github.io/directory.json")
-    .then(response => response.json())
-    .then(directoryData => {
-            console.log(directoryData)
-            data = directoryData;
-            var navpanel = "";
-            var leftStr = "";
-            for (i in data) {
-                navpanel += '<a href="#Subject' + i + '">' + data[i].subjectTitle + '</a>'
 
-                leftStr+= '<div class="card" id="Subject' + i + '">'
-                        + '<h2 class="Title">' + data[i].subjectTitle + '</h2>'
-                        + '<h5 class="SubTitle">' + data[i].subtitle + '</h5>'
-                        + '<button type="button" class="collapsible">Details</button>'
-                        + '<div class="content">'
-                        +     '<p class="Details">' + data[i].details + '</p>'
-                        +     '<a href="' + data[i].link + '">Click for more</a>'
-                        + '</div>'
-                        + '</div>'
-            };
-            document.getElementById("navpanel").innerHTML += navpanel;
-            document.getElementById('leftcolumn').innerHTML += leftStr;
-            makeCollisible()
-        }
-    );
-}
-postData();
-makeCollisible()

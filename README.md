@@ -1,5 +1,12 @@
 # RustColeone.github.io
-I need to learn engineering one way or another
 
-## Purpose
-This project is initiated because I wanted to simplify our engineering learning process. So we have some place to reference to. Physics and Mathematics both have a rich resource that someone can refer to, however, this is not really possible with engineering: resources are difficult to locate. 
+Personal site documenting projects I'm working on.
+
+## Projects
+
+- **ImageDB** — A local-first, offline image vault with tagging, captions, albums, and full-text search. Single HTML file wrapped in a Capacitor Android shell. No cloud, no accounts.
+- **DoraemonDB** — A local semantic search engine over a scanned Doraemon manga collection. 61,565 panels extracted with PaddleOCR, tagged via DeepSeek Chat, embedded with BAAI/bge-m3, and served through a Flask web UI.
+
+## Site
+
+Plain HTML/CSS/JS. Dark mode toggle included.
