@@ -277,24 +277,19 @@
                     <p class="privacy-link"><a href="https://peec-research-lab.github.io/web-tool-kit/?page=home.html" target="_blank" rel="noopener">Open the toolkit →</a></p>
                 </div>
             </div>
-        </section>
 
-        <!-- ==================== APPS ==================== -->
-        <section class="section" id="apps" aria-labelledby="apps-h">
-            <div class="container">
-                <div class="section-head">
-                    <span class="eyebrow">Apps</span>
-                    <h2 id="apps-h">Software I build outside the lab</h2>
-                    <p class="lede">
-                        These take up most of the page because they are the easiest thing to publish, not because
-                        they are the bulk of the work. They do follow the same instinct as the hardware: build it
-                        properly, own it end to end, and do not make it depend on someone else's server.
-                    </p>
-                    <p class="lede">
-                        All local-first — they work offline, they need no account, and none of them run a cloud
-                        service I operate. The source is closed, but every one documents how it handles your data;
-                        that should not be a mystery just because the code is private.
-                    </p>
+            <!-- DoraemonDB -->
+            <div class="card" id="doraemondb">
+                <h2 class="Title">DoraemonDB</h2>
+                <h5 class="SubTitle">Manga panel search engine &nbsp;·&nbsp; Python + Flask</h5>
+                <p>A local full-text and semantic search engine over a scanned Doraemon manga collection. 61,565 panels extracted from ZIP archives, OCR'd with PaddleOCR, enriched with AI-generated semantic tags, and embedded with a local language model — all served through a Flask web UI running entirely on your own machine.</p>
+
+                <button type="button" class="collapsible">Pipeline</button>
+                <div class="content">
+                    <p><strong>1. Panel extraction</strong> — <code>extract_storyboards.py</code> reads every manga page from ZIP archives, runs flood-fill/contour analysis to detect individual panels, then PaddleOCR to extract Chinese text. Results go into SQLite: source path, page name, panel index, OCR text, and the path inside the ZIP for image serving.</p>
+                    <p><strong>2. DB migration</strong> — <code>migrate_add_tags.py</code> adds <code>tags</code>, <code>tags_model</code>, <code>embedding</code>, and <code>embedding_model</code> columns to the panels table and creates the <code>tag_vocab</code> global tag vocabulary. Safe to re-run (idempotent).</p>
+                    <p><strong>3. Tag enrichment</strong> — <code>enrich_tags.py</code> calls DeepSeek Chat (<code>deepseek-chat</code>) for each un-tagged panel to produce 5–15 candidate Chinese semantic tags (e.g. 哭泣, 大雄, 道具). Each candidate is deduplicated against the global <code>tag_vocab</code> using BAAI/bge-m3 cosine similarity at a 0.90 threshold — close matches reuse the canonical vocab tag; new ones are added. Requires <code>DEEPSEEK_API_KEY</code>.</p>
+                    <p><strong>4. Embedding build</strong> — <code>build_embeddings.py</code> encodes every panel into a 1024-dim float32 vector using BAAI/bge-m3 (sentence-transformers) and stores it as a BLOB. Embedding source priority: canonical tags if available, otherwise raw OCR text. One-time offline step (~60 min on CPU for 61k panels).</p>
                 </div>
 
                 <ul class="jumpbar">
@@ -688,24 +683,13 @@
                     <span class="eyebrow">Next</span>
                     <h2 id="next-h">What I'm working towards</h2>
                 </div>
-
-                <div class="grid-2">
-                    <div class="mini">
-                        <h3>Store listings</h3>
-                        <p>Getting ImageDB, Memora and NeuroCamp onto Google Play, and ImageDB onto iOS via Capacitor.</p>
-                    </div>
-                    <div class="mini">
-                        <h3>Memora</h3>
-                        <p>Finish the SQLite migration and land the Planner port as a third sync variant.</p>
-                    </div>
-                    <div class="mini">
-                        <h3>DoraemonDB</h3>
-                        <p>GPU-accelerated embedding for faster index builds, and better panel detection for double-page spreads.</p>
-                    </div>
-                    <div class="mini">
-                        <h3>PEEC toolkit</h3>
-                        <p>More calculators, plus the PCB ordering and assembly guides.</p>
-                    </div>
+                <div class="fakeimg" style="margin-bottom:10px; padding-top:1px">
+                    <p><strong>DoraemonDB</strong></p>
+                    <p>GPU-accelerated embedding for faster index builds. Better panel detection for double-page spreads.</p>
+                </div>
+                <div class="fakeimg" style="margin-bottom:0px; padding-top:1px">
+                    <p><strong>This site</strong></p>
+                    <p>More projects as they happen.</p>
                 </div>
             </div>
         </section>
