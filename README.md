@@ -25,6 +25,7 @@ The page is deliberately explicit that the software projects dominate it only be
 |---|---|
 | `index.html` | Main page |
 | `imagedb-privacy.html` | ImageDB privacy policy |
+| `mind-games-privacy.html` | NeuroCamp privacy policy |
 | `styles.css` | All styling |
 | `site.js` | Theme toggle, nav highlighting, print handling |
 | `directory.json` | Unused sample data from an earlier auto-generation idea |
