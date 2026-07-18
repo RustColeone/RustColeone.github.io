@@ -1,127 +1,741 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="HandheldFriendly" content="true">
-    <title>RustColeone — Projects</title>
-    <link rel="stylesheet" href="indexcss.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Haoxian Yan — Hardware &amp; Power Electronics Design</title>
+    <meta name="description" content="Haoxian Yan — hardware designer working on power electronics at UCLA: converter control for datacentre voltage regulators. Plus the local-first software that happens to be easier to publish.">
+    <meta name="author" content="Haoxian Yan">
+    <meta name="theme-color" content="#fafaf9">
+
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Haoxian Yan — Hardware &amp; Power Electronics Design">
+    <meta property="og:description" content="Hardware designer working on converter control for datacentre voltage regulators at UCLA, plus local-first apps: ImageDB, Memora, NeuroCamp and more.">
+    <meta property="og:url" content="https://rustcoleone.github.io/">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="canonical" href="https://rustcoleone.github.io/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230e7490'/><path d='M5 21h5v-10h6v10h6v-10h5' stroke='white' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+        /* Resolve the stored theme before first paint to avoid a flash. */
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+            } catch (e) { }
+        })();
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://rustcoleone.github.io/#person",
+          "name": "Haoxian Yan",
+          "givenName": "Haoxian",
+          "familyName": "Yan",
+          "email": "mailto:laplacengan@gmail.com",
+          "url": "https://rustcoleone.github.io/",
+          "jobTitle": "Hardware Design Engineer",
+          "affiliation": {
+            "@type": "CollegeOrUniversity",
+            "name": "University of California, Los Angeles"
+          },
+          "knowsAbout": [
+            "Power electronics",
+            "Hardware design",
+            "DC-DC converter control",
+            "Voltage regulator modules",
+            "PCB design",
+            "Local-first software"
+          ],
+          "sameAs": ["https://github.com/RustColeone"]
+        },
+        {
+          "@type": "ScholarlyArticle",
+          "name": "Fast-Response Variable-Frequency Series-Capacitor Buck VRM Through Integrated Control Approaches",
+          "author": [
+            { "@type": "Person", "name": "Guanyu Qian", "url": "https://qgy511.github.io/" },
+            { "@type": "Person", "name": "Haoxian Yan", "@id": "https://rustcoleone.github.io/#person" },
+            { "@type": "Person", "name": "Xiaofan Cui" }
+          ],
+          "datePublished": "2025-06-22",
+          "publisher": { "@type": "Organization", "name": "IEEE" },
+          "isPartOf": "2025 IEEE 26th Workshop on Control and Modeling for Power Electronics (COMPEL)",
+          "url": "https://arxiv.org/abs/2507.10086",
+          "identifier": "arXiv:2507.10086"
+        }
+      ]
+    }
+    </script>
 </head>
+
 <body>
+    <a class="skip" href="#main">Skip to content</a>
 
-    <div class="header" id="header">
-        <h1>RustColeone</h1>
-        <p>Building things I want to use</p>
-    </div>
-
-    <div class="topnav" id="navpanel">
-        <a href="#projects">Projects</a>
-        <a href="#plans">Plans</a>
-        <a onclick="darkMode()" style="float:right; cursor:pointer">Dark Mode</a>
-    </div>
-
-    <div class="row" id="projects">
-        <div class="leftcolumn">
-
-            <!-- ImageDB -->
-            <div class="card" id="imagedb">
-                <h2 class="Title">ImageDB</h2>
-                <h5 class="SubTitle">Local-first image vault &nbsp;·&nbsp; Android + Web</h5>
-                <p>A private, searchable image database where you own every byte. Import images, label them with captions, albums, and free-form tags, then search and browse them completely offline — no accounts, no cloud, no uploads to third-party servers.</p>
-
-                <button type="button" class="collapsible">Features</button>
-                <div class="content">
-                    <p><strong>Organising</strong> — Albums, free-form tags with autocomplete drawn from every tag ever used, captions, and live full-text search across captions and tags. Filter the feed by one or more tags, file type (GIF vs still), or album. A Tag Manager lets you rename or delete tags globally.</p>
-                    <p><strong>Adding images</strong> — FAB button, hold-for-camera (0.5 s hold with ring animation), drag &amp; drop onto the drop zone, paste from clipboard (Ctrl+V), receive from the Android share sheet, or batch import wizard. The batch wizard lets you set caption, album, and tags per image and supports bulk-editing shared fields across the whole batch.</p>
-                    <p><strong>Viewing</strong> — Responsive masonry grid (2–4+ columns). GIF files get a badge. Long-press or right-click a card for a context menu. Detail view is a swipeable card — swipe left/right to navigate to adjacent images with a ghost preview sliding in from the side. Lightbox with scroll-to-zoom, pinch-to-zoom, double-tap, and drag-to-pan. Pinch outward on the thumbnail in the detail view to transition directly into the lightbox.</p>
-                    <p><strong>Editing &amp; actions</strong> — Edit metadata, delete (single or multi-select), copy to clipboard (native Android <code>content://</code> URI via FileProvider), save to phone, share via system sheet, crop &amp; share. Crop supports animated GIF output for GIFs (using gifenc). Multi-select mode with select-all, invert, delete, and batch-edit actions.</p>
-                    <p><strong>Data portability</strong> — Export the entire vault as a ZIP (images, thumbnails, and a JSON metadata file). Import ZIP is merge-safe and idempotent — entries with the same ID are skipped, so re-importing never duplicates blobs.</p>
-                    <p><strong>Appearance</strong> — Dark/light mode toggle. Warm dark theme by default. Setting persists across sessions.</p>
-                </div>
-
-                <button type="button" class="collapsible">Storage Architecture</button>
-                <div class="content">
-                    <p>Images and thumbnails live in a layered blob store: Capacitor filesystem on Android (app-private, invisible to the gallery), OPFS on modern browsers (Chrome 102+, Firefox 111+, Safari 15.2+), and IndexedDB as a legacy fallback. On upgrade, blobs migrate transparently from IndexedDB to OPFS.</p>
-                    <p>Metadata, the hashbook, and settings are stored in SQLite compiled to WebAssembly via sql.js. The database file is persisted to OPFS after every write via a debounced 150 ms flush. SHA-256 deduplication (via <code>crypto.subtle.digest</code>) maps every image hash to a blob ID — importing the same file twice reuses the existing blob.</p>
-                    <p>Storage layout: <code>images/&lt;blobId&gt;.&lt;ext&gt;</code>, <code>thumbs/&lt;blobId&gt;.jpg</code>, <code>imagedb.sqlite</code>.</p>
-                </div>
-
-                <button type="button" class="collapsible">Tech &amp; Native Plugins</button>
-                <div class="content">
-                    <p><strong>Frontend</strong> — Single HTML file, no build step. HTML, CSS, and JavaScript all co-located. <code>www/index.html</code> is a generated artefact stamped with the version from <code>package.json</code>.</p>
-                    <p><strong>Native shell</strong> — Capacitor for Android. Two custom Java plugins extend the bridge:</p>
-                    <p>&nbsp;&nbsp;<strong>ClipboardImagePlugin</strong> — Writes a full-resolution image to the Android clipboard as a <code>content://</code> URI backed by FileProvider, so other apps (WhatsApp, Telegram, etc.) can paste actual pixels rather than a data URL.</p>
-                    <p>&nbsp;&nbsp;<strong>SharePlugin</strong> — Captures images shared into ImageDB from other apps. Exposes <code>getPendingShare()</code> to JS, which returns the image base64-encoded so the entry dialog opens with it pre-loaded.</p>
-                    <p><strong>Libraries</strong> — sql.js 1.10.3 (SQLite/WASM), fflate 0.8.2 (ZIP compress/decompress), gifenc 1.0.3 (animated GIF crop export), Capacitor filesystem, camera, share, clipboard, and app plugins.</p>
-                </div>
-
-                <p style="margin-top:16px;"><a href="imagedb-privacy.html">Privacy Policy</a></p>
-            </div>
-
-            <!-- DoraemonDB -->
-            <div class="card" id="doraemondb">
-                <h2 class="Title">DoraemonDB</h2>
-                <h5 class="SubTitle">Manga panel search engine &nbsp;·&nbsp; Python + Flask</h5>
-                <p>A local full-text and semantic search engine over a scanned Doraemon manga collection. 61,565 panels extracted from ZIP archives, OCR'd with PaddleOCR, enriched with AI-generated semantic tags, and embedded with a local language model — all served through a Flask web UI running entirely on your own machine.</p>
-
-                <button type="button" class="collapsible">Pipeline</button>
-                <div class="content">
-                    <p><strong>1. Panel extraction</strong> — <code>extract_storyboards.py</code> reads every manga page from ZIP archives, runs flood-fill/contour analysis to detect individual panels, then PaddleOCR to extract Chinese text. Results go into SQLite: source path, page name, panel index, OCR text, and the path inside the ZIP for image serving.</p>
-                    <p><strong>2. DB migration</strong> — <code>migrate_add_tags.py</code> adds <code>tags</code>, <code>tags_model</code>, <code>embedding</code>, and <code>embedding_model</code> columns to the panels table and creates the <code>tag_vocab</code> global tag vocabulary. Safe to re-run (idempotent).</p>
-                    <p><strong>3. Tag enrichment</strong> — <code>enrich_tags.py</code> calls DeepSeek Chat (<code>deepseek-chat</code>) for each un-tagged panel to produce 5–15 candidate Chinese semantic tags (e.g. 哭泣, 大雄, 道具). Each candidate is deduplicated against the global <code>tag_vocab</code> using BAAI/bge-m3 cosine similarity at a 0.90 threshold — close matches reuse the canonical vocab tag; new ones are added. Requires <code>DEEPSEEK_API_KEY</code>.</p>
-                    <p><strong>4. Embedding build</strong> — <code>build_embeddings.py</code> encodes every panel into a 1024-dim float32 vector using BAAI/bge-m3 (sentence-transformers) and stores it as a BLOB. Embedding source priority: canonical tags if available, otherwise raw OCR text. One-time offline step (~60 min on CPU for 61k panels).</p>
-                </div>
-
-                <button type="button" class="collapsible">Search Server &amp; Scoring</button>
-                <div class="content">
-                    <p>Flask server at <code>localhost:5051</code>. On first request it loads all embedding BLOBs into a numpy float32 matrix in memory (~10 min refresh) and caches the tag vocabulary (~5 min refresh).</p>
-                    <p>The unified search endpoint (<code>/api/search/unified</code>) combines three modes, each contributing a normalised 0–1 score per panel:</p>
-                    <p>&nbsp;&nbsp;<strong>词 (keywords)</strong> — always-on; <code>matched_terms / total_terms</code> against OCR text.</p>
-                    <p>&nbsp;&nbsp;<strong>意 (vector)</strong> — cosine similarity via dot product on L2-normalised bge-m3 embeddings. Default ON.</p>
-                    <p>&nbsp;&nbsp;<strong>AI (semantic)</strong> — DeepSeek Chat maps the query to vocab tags; <code>matched_query_tags / total_query_tags</code>. Default OFF.</p>
-                    <p>Combined score = sum of active method scores, normalised to 0–100% by the number of active methods. Results sorted descending. Negative exclusions (<code>-term</code>) work across all methods.</p>
-                </div>
-
-                <button type="button" class="collapsible">Search UI</button>
-                <div class="content">
-                    <p>Single-page app, no build step. Search row with text input, regex toggle (<code>.*</code>), and search button. Filter row with 意 (vector, default ON), AI (DeepSeek semantic, default OFF), series dropdown, and character-count filter. 词 (keywords) is always-on but hidden.</p>
-                    <p>Result cards show extracted text, tag chips (matched tags highlighted), and a score badge: <code>75% 词82·意60</code> for unified mode, <code>完全匹配</code> for exact phrase, <code>相似 XX%</code> for vector-only. Lightbox with crop and copy-to-clipboard support.</p>
-                </div>
-            </div>
-
+    <nav class="nav" aria-label="Primary">
+        <div class="container">
+            <a class="nav-brand" href="#top">Haoxian&nbsp;Yan</a>
+            <ul class="nav-links">
+                <li><a href="#research">Research</a></li>
+                <li><a href="#toolkit">Toolkit</a></li>
+                <li><a href="#apps">Apps</a></li>
+                <li><a href="#next">Next</a></li>
+            </ul>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+                <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.2" />
+                    <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.1 5.1l1.4 1.4M17.5 17.5l1.4 1.4M18.9 5.1l-1.4 1.4M6.5 17.5l-1.4 1.4" />
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.5 14.3A8.5 8.5 0 1 1 9.7 3.5a7 7 0 0 0 10.8 10.8Z" />
+                </svg>
+            </button>
         </div>
-        <div class="rightcolumn">
-            <div class="card" id="plans">
-                <h3>Plans</h3>
-                <div class="fakeimg" style="margin-bottom:10px; padding-top:1px">
-                    <p><strong>ImageDB</strong></p>
-                    <p>iOS support via Capacitor. Better GIF handling in the lightbox.</p>
-                </div>
-                <div class="fakeimg" style="margin-bottom:10px; padding-top:1px">
-                    <p><strong>DoraemonDB</strong></p>
-                    <p>GPU-accelerated embedding for faster index builds. Better panel detection for double-page spreads.</p>
-                </div>
-                <div class="fakeimg" style="margin-bottom:0px; padding-top:1px">
-                    <p><strong>This site</strong></p>
-                    <p>More projects as they happen.</p>
-                </div>
+    </nav>
+
+    <header class="hero" id="top">
+        <div class="container">
+            <h1>Haoxian Yan</h1>
+            <p class="hero-role">Hardware designer. Power electronics at UCLA.</p>
+
+            <p class="hero-bio">
+                I design power electronics — high-frequency DC–DC converters and the voltage regulator modules
+                that feed AI datacentre silicon. Converters, magnetics, control loops, boards.
+            </p>
+
+            <p class="hero-bio">
+                Most of what you can actually click on this page is software, which is largely an artefact of the
+                medium: a repository hosts a web app far better than it hosts a board layout or a bench measurement.
+                The software is real work and I stand behind it — but hardware is the discipline I actually practise.
+            </p>
+
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="https://arxiv.org/pdf/2507.10086" target="_blank" rel="noopener">Read the paper</a>
+                <a class="btn" href="#apps">Browse the apps</a>
+                <a class="btn" href="mailto:laplacengan@gmail.com">Email me</a>
             </div>
-            <div class="card">
-                <h3>About</h3>
-                <div class="fakeimg" style="margin-bottom:0px; padding-top:1px">
-                    <p>I build tools I want to exist. Most of them are local-first and offline-capable.</p>
-                </div>
+
+            <div class="hero-meta">
+                <span>UCLA PEEC Lab</span>
+                <span>Los Angeles, CA</span>
+                <span>Converters · magnetics · PCB design</span>
+                <span><a href="https://github.com/RustColeone" target="_blank" rel="noopener">github.com/RustColeone</a></span>
             </div>
         </div>
-    </div>
+    </header>
 
-    <div class="footer">
-        <h2><a href="#header" style="text-decoration: none;">Back to Top</a></h2>
-    </div>
+    <main id="main">
 
+        <!-- ==================== RESEARCH ==================== -->
+        <section class="section" id="research" aria-labelledby="research-h">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">Research</span>
+                    <h2 id="research-h">Converter control for datacentre power</h2>
+                    <p class="lede">
+                        Modern processors slam their current draw up and down faster than a conventional linear
+                        controller can respond, and the voltage rail sags before the loop catches up. That gap is
+                        what I work on.
+                    </p>
+                </div>
+
+                <article class="paper">
+                    <h3 class="paper-title">
+                        Fast-Response Variable-Frequency Series-Capacitor Buck VRM Through Integrated Control Approaches
+                    </h3>
+                    <p class="paper-authors">
+                        Guanyu Qian, <span class="me">Haoxian Yan</span>, Xiaofan Cui
+                    </p>
+                    <ul class="pills">
+                        <li class="pill pill-accent">IEEE COMPEL 2025</li>
+                        <li class="pill">Control &amp; Modeling for Power Electronics</li>
+                        <li class="pill"><time datetime="2025-06">June 2025</time></li>
+                        <li class="pill">arXiv:2507.10086</li>
+                    </ul>
+                    <ul class="linklist">
+                        <li>
+                            <a href="https://arxiv.org/pdf/2507.10086" target="_blank" rel="noopener">
+                                <span>Read the paper</span><span class="note">arXiv PDF</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://arxiv.org/abs/2507.10086" target="_blank" rel="noopener">
+                                <span>arXiv abstract page</span><span class="note">physics.app-ph · eess.SY</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=6jr3l3gAAAAJ&citation_for_view=6jr3l3gAAAAJ:d1gkVwhDpl0C" target="_blank" rel="noopener">
+                                <span>Google Scholar entry</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="accordions">
+                        <details>
+                            <summary>What the paper does</summary>
+                            <div class="details-body">
+                                <p>
+                                    Series-capacitor Buck converters are attractive for point-of-load regulation but
+                                    awkward to control: the added capacitor makes the small-signal behaviour messier,
+                                    and running the converter at variable frequency makes it messier still. A linear
+                                    controller tuned for stability is necessarily slow on large transients.
+                                </p>
+                                <p>
+                                    The paper proposes an <strong>integrated control scheme</strong> that runs a linear
+                                    and a nonlinear controller together. The linear loop handles steady-state
+                                    regulation and disturbance rejection; the nonlinear loop takes over on large load
+                                    steps, using time-optimal control derived from <strong>Pontryagin's Maximum
+                                    Principle</strong> over a discrete-time model of the converter.
+                                </p>
+                                <p>
+                                    The headline result: on a heavy load step-up, output voltage recovery is
+                                    <strong>over ten times faster</strong> than a linear-controller-only design in
+                                    simulation. Hardware measurements confirm stable disturbance rejection.
+                                </p>
+                            </div>
+                        </details>
+                    </div>
+                </article>
+
+                <aside class="callout" aria-labelledby="disclosure-h">
+                    <h4 id="disclosure-h">Collaborator disclosure — Guanyu Qian</h4>
+                    <p>
+                        <a href="https://qgy511.github.io/" target="_blank" rel="noopener">Guanyu Qian</a> (钱冠宇) is a
+                        Ph.D. student in Electrical &amp; Computer Engineering at UCLA and the <strong>first
+                        author</strong> of the paper above; I am the second author. We work in the same group, under
+                        Prof. Xiaofan Cui, who is the paper's third author and the faculty lead of the PEEC lab.
+                    </p>
+                    <p>
+                        His research covers GaN power conversion, high-frequency DC–DC converters, datacentre power
+                        delivery, point-of-load VRMs, magnetics and trans-inductor voltage regulators (TLVR), and
+                        reinforcement learning applied to converter control. He advanced to candidacy in February 2026.
+                    </p>
+                    <p>
+                        I am stating this plainly because our work overlaps: if you are evaluating the COMPEL paper, or
+                        anything I write about VRM control, you should know we are co-authors and lab colleagues
+                        rather than independent sources.
+                    </p>
+                </aside>
+            </div>
+        </section>
+
+        <!-- ==================== TOOLKIT ==================== -->
+        <section class="section" id="toolkit" aria-labelledby="toolkit-h">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">UCLA PEEC Lab</span>
+                    <h2 id="toolkit-h">Web toolkit</h2>
+                    <p class="lede">
+                        I build and maintain tools for the lab's public web toolkit — calculators and guides for the
+                        small, repetitive numbers that come up constantly in circuit and board design. Wire gauges.
+                        Trace widths. Core sizing. The resistor colour band you have looked up four hundred times and
+                        still cannot recall.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-head">
+                        <h3>Calculators</h3>
+                    </div>
+                    <p class="card-sub">All client-side · no accounts · nothing you type leaves the browser</p>
+
+                    <ul class="linklist">
+                        <li><a href="https://peec-research-lab.github.io/web-tool-kit/?page=calculator_scientific.html#" target="_blank" rel="noopener"><span>Scientific calculator &amp; LaTeX/SVG</span><span class="note">evaluate expressions, get typesettable output</span></a></li>
+                        <li><a href="https://peec-research-lab.github.io/web-tool-kit/?page=calculator_wire_thickness.html" target="_blank" rel="noopener"><span>PCB trace requirements</span><span class="note">trace width for a current and temperature rise</span></a></li>
+                        <li><a href="https://peec-research-lab.github.io/web-tool-kit/?page=calculator_wire_resistance.html" target="_blank" rel="noopener"><span>Resistance of a common wire</span><span class="note">gauge, length and material to resistance</span></a></li>
+                        <li><a href="https://peec-research-lab.github.io/web-tool-kit/?page=calculator_inductor_core.html#" target="_blank" rel="noopener"><span>Inductor core requirements</span><span class="note">core sizing for a target inductance</span></a></li>
+                        <li><a href="https://peec-research-lab.github.io/web-tool-kit/?page=calculator_resistor_code.html#" target="_blank" rel="noopener"><span>Resistor code</span><span class="note">decode printed markings</span></a></li>
+                        <li><a href="https://peec-research-lab.github.io/web-tool-kit/?page=calculator_capacitor_code.html#" target="_blank" rel="noopener"><span>Capacitor code</span><span class="note">decode printed markings</span></a></li>
+                        <li><a href="https://peec-research-lab.github.io/web-tool-kit/?page=calculator_resistor_color_code.html#" target="_blank" rel="noopener"><span>Resistor colour code</span><span class="note">colour bands to value and tolerance</span></a></li>
+                    </ul>
+
+                    <div class="accordions">
+                        <details>
+                            <summary>Why it exists</summary>
+                            <div class="details-body">
+                                <p>
+                                    Every lab accumulates a pile of half-trusted spreadsheets and bookmarked
+                                    calculators of unknown provenance. Consolidating them into one maintained,
+                                    openly readable place means the whole group works from the same assumptions —
+                                    and anyone outside the lab gets the same tools for free.
+                                </p>
+                                <p>
+                                    The whole thing is a static site: no backend, no accounts, no submitted values
+                                    leaving the browser. That is a privacy property, but mostly it is a durability
+                                    property — a static page keeps working long after whoever wrote it has graduated.
+                                </p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <p class="privacy-link"><a href="https://peec-research-lab.github.io/web-tool-kit/?page=home.html" target="_blank" rel="noopener">Open the toolkit →</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== APPS ==================== -->
+        <section class="section" id="apps" aria-labelledby="apps-h">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">Apps</span>
+                    <h2 id="apps-h">Software I build outside the lab</h2>
+                    <p class="lede">
+                        These take up most of the page because they are the easiest thing to publish, not because
+                        they are the bulk of the work. They do follow the same instinct as the hardware: build it
+                        properly, own it end to end, and do not make it depend on someone else's server.
+                    </p>
+                    <p class="lede">
+                        All local-first — they work offline, they need no account, and none of them run a cloud
+                        service I operate. The source is closed, but every one documents how it handles your data;
+                        that should not be a mystery just because the code is private.
+                    </p>
+                </div>
+
+                <ul class="jumpbar">
+                    <li><a href="#imagedb">ImageDB</a></li>
+                    <li><a href="#memora">Memora</a></li>
+                    <li><a href="#neurocamp">NeuroCamp</a></li>
+                    <li><a href="#planner">Planner</a></li>
+                    <li><a href="#doraemondb">DoraemonDB</a></li>
+                    <li><a href="#internals">Shared blocks</a></li>
+                </ul>
+
+                <!-- ImageDB -->
+                <article class="card app" id="imagedb">
+                    <div class="card-head">
+                        <h3>ImageDB</h3>
+                        <ul class="pills" style="margin-top:0">
+                            <li class="pill">Android</li>
+                            <li class="pill">Web</li>
+                            <li class="pill">v1.2.15</li>
+                        </ul>
+                    </div>
+                    <p class="card-sub">Local-first image vault</p>
+                    <p class="card-lede">
+                        A private, searchable image database where you own every byte. Import images, label them with
+                        captions, albums and free-form tags, then search and browse them completely offline — no
+                        accounts, no cloud, no uploads to third-party servers.
+                    </p>
+
+                    <div class="accordions">
+                        <details>
+                            <summary>Why I built it</summary>
+                            <div class="details-body">
+                                <p>
+                                    Every gallery app makes one of two choices: sync everything to a cloud you do not
+                                    control, or defer to the system media library and inherit its organisation model —
+                                    which is to say, folders and a date. Neither lets you actually annotate a picture
+                                    and find it again three years later by what is <em>in</em> it.
+                                </p>
+                                <p>
+                                    ImageDB is the third option. One HTML file, one SQLite database, one folder of
+                                    image files, all on your device. The deliberate minimalism is the point: an
+                                    archive you cannot open in ten years is not an archive.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Features</summary>
+                            <div class="details-body">
+                                <p><strong>Ingestion</strong> — FAB add, hold-for-camera, drag &amp; drop, paste, URL-linked images, Android share-sheet intake, and a batch import wizard with per-image and bulk field editing.</p>
+                                <p><strong>Books</strong> — multi-page collections from images, ZIP or PDF. Reader with scroll / left-to-right / right-to-left modes, per-page copy, save and share, and export as PDF or a paneled image.</p>
+                                <p><strong>Organising</strong> — albums, free-form tags with autocomplete drawn from every tag ever used, captions, live search, and filters by album, tag, type or date. A global Tag Manager renames or deletes tags library-wide.</p>
+                                <p><strong>Viewing</strong> — responsive grid with XS–XL card sizes and a time-grouped feed. Detail view is a swipeable card with a ghost preview sliding in from the side. Lightbox with scroll, pinch and double-tap zoom plus drag-to-pan.</p>
+                                <p><strong>Editing</strong> — crop canvas with undo stack and animated-GIF output, a GIF editor (speed, frame drop, quality, trim, crop), and a Panel Images combiner with per-image crop and re-grouping.</p>
+                                <p><strong>Data portability</strong> — scoped multi-part ZIP export, merge-safe multi-file import, and a verify-and-repair scan. Trash is a soft delete with 30-day auto-purge.</p>
+                                <p><strong>Other</strong> — multi-select batch operations, an "Organise Quiz" daily tagging challenge with a Library Health score, dark/light theme, multi-language with system auto-detect, and a configurable backup nudge.</p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Storage architecture</summary>
+                            <div class="details-body">
+                                <p>
+                                    Images and thumbnails live in a layered blob store: the Capacitor filesystem on
+                                    Android (app-private, invisible to gallery apps), OPFS on modern browsers, and
+                                    IndexedDB as a legacy fallback. On upgrade, blobs migrate transparently from
+                                    IndexedDB to OPFS with no user action.
+                                </p>
+                                <p>
+                                    Metadata, the hashbook and settings live in SQLite compiled to WebAssembly via
+                                    sql.js. Every snapshot is written to a <code>.tmp</code> file, read back and
+                                    checked with <code>PRAGMA quick_check</code> before it replaces the primary.
+                                    Startup validates the primary and can recover the staged or last-known-good copy;
+                                    an unrecoverable database is reported as an error rather than silently presented
+                                    as a healthy empty library.
+                                </p>
+                                <p>
+                                    SHA-256 deduplication maps every image hash to a blob ID, so importing the same
+                                    file twice reuses the existing blob.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Tech &amp; native plugins</summary>
+                            <div class="details-body">
+                                <p><strong>Frontend</strong> — single HTML file, no build step. <code>www/</code> is a generated artefact stamped with the version from <code>package.json</code>.</p>
+                                <p><strong>Native shell</strong> — Capacitor for Android with two custom Java plugins. <strong>ClipboardImagePlugin</strong> writes a full-resolution image to the clipboard as a <code>content://</code> URI backed by FileProvider, so other apps paste actual pixels rather than a data URL. <strong>SharePlugin</strong> captures images shared in from other apps and hands them to JS base64-encoded.</p>
+                                <p><strong>Libraries</strong> — sql.js, fflate, gifenc, pdf.js, and the Capacitor filesystem, camera, share, clipboard and app plugins. All bundled; nothing is fetched from a CDN at runtime.</p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Privacy &amp; network boundaries</summary>
+                            <div class="details-body">
+                                <p><strong>No account, no analytics, no telemetry, no ImageDB-operated sync service.</strong> Originals, thumbnails and metadata live in app-private storage.</p>
+                                <p><strong>Android system backup</strong> — <code>allowBackup</code> is intentionally on. If <em>you</em> enable Android backup, the OS may include eligible ImageDB data in <em>your</em> backup. I do not turn that on and do not operate the destination.</p>
+                                <p><strong>Ads</strong> — proceeding to the advanced, non-essential Panel Images combine step may show one small AdMob banner; that is the only automatic ad placement, and it keeps maintenance funded. A separate rewarded "support me" button is always user-initiated. The rest of the app is ad-free.</p>
+                                <p><strong>Linked images</strong> — an entry saved as a URL is fetched from its source host when displayed, exposing a normal network request to that host. You can make linked entries offline from Backup &amp; Data.</p>
+                                <p>In short, data leaves the vault only when you invoke an OS share/save action, export a backup, follow a linked image, enable Android system backup, or enter the ad-supported Panel Images step.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <p class="privacy-link"><a href="imagedb-privacy.html">Full privacy policy →</a></p>
+                    <br>
+                    <span class="storeslot">Google Play — listing link coming soon</span>
+                </article>
+
+                <!-- Memora -->
+                <article class="card app" id="memora">
+                    <div class="card-head">
+                        <h3>Memora</h3>
+                        <ul class="pills" style="margin-top:0">
+                            <li class="pill">Flask server</li>
+                            <li class="pill">Android</li>
+                            <li class="pill">Self-hosted</li>
+                        </ul>
+                    </div>
+                    <p class="card-sub">Memo, finance &amp; planner database you run yourself</p>
+                    <p class="card-lede">
+                        A personal database on your own machine. Two halves sharing one web frontend: a Flask server
+                        you host that owns all the data, and a Capacitor Android client that talks to it over your own
+                        network. Notes, receipts and finances, and a planner — one system, no vendor.
+                    </p>
+
+                    <div class="accordions">
+                        <details>
+                            <summary>Why I built it</summary>
+                            <div class="details-body">
+                                <p>
+                                    Note apps and budgeting apps both want to be the place your life lives, and both
+                                    want that place to be their server. The moment you accept that, your data's
+                                    longevity is tied to someone else's business model — and personal finance records
+                                    are about the last thing I want sitting in a startup's database.
+                                </p>
+                                <p>
+                                    Memora inverts it. The server is yours; it runs on a machine you control and
+                                    writes files you can read. The phone app is a client, not the source of truth. If
+                                    I stop maintaining it tomorrow, the Flask app and your files keep working.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>How it works</summary>
+                            <div class="details-body">
+                                <p><strong>Variants</strong> — one codebase serves three modes: memos, finance and planner. The backend routes each to its own store, selected by query param, header or referer.</p>
+                                <p><strong>Sync</strong> — an event-sourced operation log. Clients push operations and pull everything since a given op ID; server state is rebuilt purely by replaying the log, with snapshots for compaction. Because the log is variant-agnostic, a new data type needs no new sync code. Conflicts resolve last-write-wins per entry.</p>
+                                <p><strong>Storage</strong> — JSON document stores plus SQLite, currently mid-migration toward SQLite throughout. Live data sits in <code>data/</code> and <code>uploads/</code>, both permanently excluded from version control.</p>
+                                <p><strong>Frontend</strong> — one shared source tree used by both the server and the mobile build. Includes memo capture, a finance view, OCR for receipts, and an optional AI chat that can create entries from uploaded images.</p>
+                                <p><strong>Testing</strong> — Playwright browser tests plus a backend assertion suite covering sync and cross-variant isolation.</p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Privacy</summary>
+                            <div class="details-body">
+                                <p><strong>There is no Memora cloud.</strong> I do not run a server for this, cannot see your data, and have no way to. Your notes and finances live on hardware you own, and the app talks only to the server address you type in.</p>
+                                <p><strong>Cleartext HTTP is allowed</strong> — deliberately, because most people self-host over a home LAN without a certificate. That is a real trade-off: on an untrusted network, use HTTPS or a VPN rather than plain HTTP.</p>
+                                <p><strong>AI features are opt-in and bring-your-own-key.</strong> Chat, OCR-assisted entry and image analysis call whichever provider you configure (OpenAI, Gemini or DeepSeek) using <em>your</em> API key. Leave the key unset and those features stay off; set one and what you submit goes to that provider under their terms, not mine. Everything else works with no key at all.</p>
+                                <p><strong>Backups are yours.</strong> Data directories never leave your machine on their own — which also means nobody else is making backups for you.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <span class="storeslot">Google Play — listing link coming soon</span>
+                </article>
+
+                <!-- NeuroCamp -->
+                <article class="card app" id="neurocamp">
+                    <div class="card-head">
+                        <h3>NeuroCamp</h3>
+                        <ul class="pills" style="margin-top:0">
+                            <li class="pill">Android</li>
+                            <li class="pill">Web</li>
+                            <li class="pill">v1.0.8</li>
+                        </ul>
+                    </div>
+                    <p class="card-sub">Eight cognitive games behind a camping-themed hub</p>
+                    <p class="card-lede">
+                        Attention, reaction time, working memory and ear training. Each game stands alone and takes a
+                        couple of minutes. No build step, no server, no account: open it and play.
+                    </p>
+
+                    <div class="accordions">
+                        <details>
+                            <summary>Why I built it</summary>
+                            <div class="details-body">
+                                <p>
+                                    Brain-training apps have a reputation problem, mostly earned: the category is full
+                                    of subscription funnels, inflated neuroscience claims, and daily-streak mechanics
+                                    designed to farm engagement rather than attention.
+                                </p>
+                                <p>
+                                    I wanted the actual tasks — Schulte tables, stop-signal, interval recognition —
+                                    without the apparatus around them. These are well-established psychological
+                                    paradigms and they work fine as small self-contained games. No accounts, no streak
+                                    guilt, no claims about making you smarter. Just the task, a timer, and your own
+                                    previous score.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>The games</summary>
+                            <div class="details-body">
+                                <ul>
+                                    <li><strong>Schulte Table</strong> — find numbers in sequence on a grid as fast as possible. Visual scanning and concentration.</li>
+                                    <li><strong>Stop Signal</strong> — respond fast to go signals, withhold on stop signals. The classic executive-control paradigm.</li>
+                                    <li><strong>Whac-A-Mole</strong> — reaction speed and target acquisition under time pressure.</li>
+                                    <li><strong>Animal Ranger</strong> — study animals with randomised profiles, then match each to its profile. Associative memory under load.</li>
+                                    <li><strong>Lotus Trail</strong> — memorise a path across lily pads that vanishes after a preview. Spatial working memory.</li>
+                                    <li><strong>Chord Scout</strong> — hear a synthesised chord, name it from three options. Major / minor / diminished discrimination.</li>
+                                    <li><strong>Interval Birds</strong> — birds sing an interval; identify it. Fully synthesised with the Web Audio API.</li>
+                                    <li><strong>Rhythm Sync</strong> — birds count in, audio cuts out, and you tap exactly on the next silent beat. Internal timing without a cue.</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Privacy</summary>
+                            <div class="details-body">
+                                <p><strong>Nothing is collected.</strong> No accounts, no analytics, no ads, no network calls. The games hold no personal data — there is nothing to transmit and no server to transmit it to.</p>
+                                <p>Scores and theme preference stay in local storage on your device. Audio is synthesised in-browser, so even the sounds require no downloads. Uninstalling removes everything.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <span class="storeslot">Google Play — listing link coming soon</span>
+                </article>
+
+                <!-- Planner -->
+                <article class="card app" id="planner">
+                    <div class="card-head">
+                        <h3>Planner</h3>
+                        <ul class="pills" style="margin-top:0">
+                            <li class="pill">Web</li>
+                            <li class="pill">Prototype</li>
+                        </ul>
+                    </div>
+                    <p class="card-sub">Calendar, todos, projects &amp; habits</p>
+                    <p class="card-lede">
+                        A single-page planner in a bento layout: a calendar with day/week/month/year ranges, a todo
+                        list, a project view with Gantt-style milestones, and habit tracking. Currently a front-end
+                        prototype — data lives only in your browser.
+                    </p>
+
+                    <div class="accordions">
+                        <details>
+                            <summary>Why I built it, and where it's going</summary>
+                            <div class="details-body">
+                                <p>
+                                    This started as a sandbox: I wanted to work out the interaction design for
+                                    calendar-plus-todos-plus-projects without committing to a data model or a sync
+                                    story. Building against local storage first meant I could throw away layouts
+                                    cheaply.
+                                </p>
+                                <p>
+                                    It worked, so it is now being ported into <strong>Memora</strong> as a third sync
+                                    variant alongside memos and finance — each event, todo, project and habit becoming
+                                    one entry in the same event-sourced operation log. The standalone prototype stays
+                                    around as its own thing for now.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Privacy</summary>
+                            <div class="details-body">
+                                <p><strong>Local storage only.</strong> The prototype has no backend at all: everything you enter stays in your browser and never leaves the device. Clearing site data erases it — there is no copy anywhere else.</p>
+                                <p>Once the port into Memora lands, it inherits Memora's model: your own self-hosted server, your own data directory.</p>
+                            </div>
+                        </details>
+                    </div>
+                </article>
+
+                <!-- DoraemonDB -->
+                <article class="card app" id="doraemondb">
+                    <div class="card-head">
+                        <h3>DoraemonDB</h3>
+                        <ul class="pills" style="margin-top:0">
+                            <li class="pill">Python</li>
+                            <li class="pill">Flask</li>
+                            <li class="pill">61,565 panels</li>
+                        </ul>
+                    </div>
+                    <p class="card-sub">Manga panel search engine</p>
+                    <p class="card-lede">
+                        Local full-text and semantic search over a scanned manga collection. Panels extracted from ZIP
+                        archives, OCR'd with PaddleOCR, enriched with AI-generated semantic tags, and embedded with a
+                        local language model — all served through a Flask UI on your own machine.
+                    </p>
+
+                    <div class="accordions">
+                        <details>
+                            <summary>Why I built it</summary>
+                            <div class="details-body">
+                                <p>
+                                    I wanted to find a specific panel — the one with a particular expression, or a
+                                    particular gadget — in a collection far too large to page through. Filename search
+                                    is useless for this; the information you want is inside the image.
+                                </p>
+                                <p>
+                                    It turned into a nice demonstration that a full OCR-plus-embedding search pipeline
+                                    fits comfortably on one desktop machine. Nothing here needs a datacentre.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Pipeline</summary>
+                            <div class="details-body">
+                                <p><strong>1. Panel extraction</strong> — every page is read from its ZIP archive, flood-fill/contour analysis detects individual panels, then PaddleOCR extracts the Chinese text into SQLite.</p>
+                                <p><strong>2. Tag enrichment</strong> — each untagged panel goes to DeepSeek Chat for 5–15 candidate Chinese semantic tags. Each candidate is deduplicated against a global vocabulary using BAAI/bge-m3 cosine similarity at a 0.90 threshold: close matches reuse the canonical tag, new ones extend the vocabulary.</p>
+                                <p><strong>3. Embedding build</strong> — every panel is encoded into a 1024-dim float32 vector with BAAI/bge-m3, preferring canonical tags over raw OCR text. A one-time offline step, roughly an hour on CPU.</p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Search &amp; scoring</summary>
+                            <div class="details-body">
+                                <p>
+                                    On first request the server loads every embedding into an in-memory numpy matrix
+                                    and caches the tag vocabulary. The unified search endpoint combines three modes,
+                                    each contributing a normalised 0–1 score: <strong>词 (keywords)</strong>, always on;
+                                    <strong>意 (vector)</strong>, cosine similarity on L2-normalised embeddings, on by
+                                    default; and <strong>AI (semantic)</strong>, where DeepSeek maps the query onto
+                                    vocabulary tags, off by default.
+                                </p>
+                                <p>
+                                    The combined score is the sum of active methods normalised by how many are active,
+                                    and negative exclusions (<code>-term</code>) work across all three. Result cards
+                                    show extracted text, tag chips with matches highlighted, and a score badge.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Privacy</summary>
+                            <div class="details-body">
+                                <p>Runs entirely on your own machine against your own files. The one exception is the optional AI tagging and AI search mode, which send text (never images) to DeepSeek using your own API key. Keyword and vector search work fully offline once the index is built — the embedding model runs locally.</p>
+                            </div>
+                        </details>
+                    </div>
+                </article>
+
+                <!-- Shared building blocks -->
+                <article class="card app" id="internals">
+                    <div class="card-head">
+                        <h3>Shared building blocks</h3>
+                    </div>
+                    <p class="card-sub">Components several of the apps are built from</p>
+
+                    <div class="accordions">
+                        <details>
+                            <summary>UniversalReader</summary>
+                            <div class="details-body">
+                                <p>
+                                    A zero-dependency embeddable reader for images and PDFs, originally extracted from
+                                    ImageDB so every project would stop maintaining its own copy. Scroll, left-to-right
+                                    and right-to-left page modes; double-tap and pinch zoom; keyboard controls;
+                                    long-press for a page preview with copy/save/share; configurable theme, background
+                                    colour and page separator. One JS file and one CSS file, no bundler, with pdf.js as
+                                    the only optional dependency.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Icon library</summary>
+                            <div class="details-body">
+                                <p>
+                                    2,129 MIT-licensed SVG icons across three collections (Scarlab Oval Line, Solar
+                                    Broken Line, Coolicons Line Oval), validated as well-formed and shared across the
+                                    apps. A handful were repaired or redrawn in-set where the upstream source had gone
+                                    missing. Icons are inlined into each app's stylesheet at build time rather than
+                                    fetched at runtime, so nothing phones home for a glyph.
+                                </p>
+                            </div>
+                        </details>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ==================== NEXT ==================== -->
+        <section class="section" id="next" aria-labelledby="next-h">
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">Next</span>
+                    <h2 id="next-h">What I'm working towards</h2>
+                </div>
+
+                <div class="grid-2">
+                    <div class="mini">
+                        <h3>Store listings</h3>
+                        <p>Getting ImageDB, Memora and NeuroCamp onto Google Play, and ImageDB onto iOS via Capacitor.</p>
+                    </div>
+                    <div class="mini">
+                        <h3>Memora</h3>
+                        <p>Finish the SQLite migration and land the Planner port as a third sync variant.</p>
+                    </div>
+                    <div class="mini">
+                        <h3>DoraemonDB</h3>
+                        <p>GPU-accelerated embedding for faster index builds, and better panel detection for double-page spreads.</p>
+                    </div>
+                    <div class="mini">
+                        <h3>PEEC toolkit</h3>
+                        <p>More calculators, plus the PCB ordering and assembly guides.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h2>Get in touch</h2>
+                    <p>
+                        Happy to talk about converter control, local-first architecture, or why your gallery app
+                        should not need an account.
+                    </p>
+                </div>
+                <ul class="footer-links">
+                    <li><a href="mailto:laplacengan@gmail.com">laplacengan@gmail.com</a></li>
+                    <li><a href="https://github.com/RustColeone" target="_blank" rel="noopener">github.com/RustColeone</a></li>
+                    <li><a href="https://arxiv.org/abs/2507.10086" target="_blank" rel="noopener">arXiv:2507.10086</a></li>
+                    <li><a href="imagedb-privacy.html">ImageDB privacy policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-base">
+                <span>© <span id="year">2026</span> Haoxian Yan</span>
+                <span>App source is closed; privacy behaviour is documented above.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="site.js" defer></script>
 </body>
 
-<script type="text/javascript" src="indexjs.js"></script>
-<script> makeCollisible(); </script>
 </html>

@@ -1,65 +1,197 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ImageDB — Privacy Policy</title>
-    <link rel="stylesheet" href="indexcss.css">
+    <meta name="description" content="Privacy policy for ImageDB, a local-first image vault. No accounts, no analytics, no cloud service — with every network boundary documented.">
+    <meta name="theme-color" content="#fafaf9">
+    <meta name="robots" content="index, follow">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230e7490'/><path d='M5 21h5v-10h6v10h6v-10h5' stroke='white' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("theme");
+                if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+            } catch (e) { }
+        })();
+    </script>
 </head>
+
 <body>
+    <a class="skip" href="#main">Skip to content</a>
 
-    <div class="header" id="header">
-        <h1>ImageDB</h1>
-        <p>Privacy Policy</p>
-    </div>
-
-    <div class="topnav">
-        <a href="index.html">← Back</a>
-        <a onclick="darkMode()" style="float:right; cursor:pointer">Dark Mode</a>
-    </div>
-
-    <div class="row">
-        <div class="leftcolumn">
-
-            <div class="card">
-                <h2 class="Title">Privacy Policy for ImageDB</h2>
-                <p style="color:#888; font-size:13px;">Last updated: May 2026</p>
-
-                <h3>1. Data Collection and Usage</h3>
-                <p>ImageDB is a completely offline application. We do not collect, store, share, or transmit any personal information, user data, or analytics.</p>
-
-                <h3>2. Device Permissions</h3>
-                <p>To function properly, the app requires access to your device's local storage. This permission is used exclusively to display your images and media within the app. None of your photos, files, or data ever leave your device or get sent to any external servers.</p>
-
-                <h3>3. Third-Party Services</h3>
-                <p>The app includes an optional "Support me by watching this ad" button. If you choose to interact with it, a rewarded ad is served via Google AdMob. AdMob may collect certain device information in accordance with <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. This is the only external service the app uses, and it is only activated by your explicit interaction. No other third-party services, tracking tools, or analytics are used.</p>
-
-                <h3>4. Changes to this Policy</h3>
-                <p>If we ever change how this app operates regarding your data, we will update this policy.</p>
-
-                <h3>5. Contact</h3>
-                <p>If you have any questions, you can contact me at: <a href="mailto:laplacengan@gmail.com">laplacengan@gmail.com</a></p>
-            </div>
-
+    <nav class="nav" aria-label="Primary">
+        <div class="container">
+            <a class="nav-brand" href="index.html">Haoxian&nbsp;Yan</a>
+            <ul class="nav-links">
+                <li><a href="index.html#imagedb">← ImageDB</a></li>
+            </ul>
+            <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+                <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.2" />
+                    <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.1 5.1l1.4 1.4M17.5 17.5l1.4 1.4M18.9 5.1l-1.4 1.4M6.5 17.5l-1.4 1.4" />
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.5 14.3A8.5 8.5 0 1 1 9.7 3.5a7 7 0 0 0 10.8 10.8Z" />
+                </svg>
+            </button>
         </div>
-        <div class="rightcolumn">
-            <div class="card">
-                <h3>ImageDB</h3>
-                <div class="fakeimg" style="margin-bottom:0px; padding-top:1px">
-                    <p>A local-first image vault. All your images stay on your device — no cloud, no accounts, no uploads.</p>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <span class="eyebrow">ImageDB</span>
+            <h1>Privacy Policy</h1>
+            <p class="hero-role">What the app does with your data, and every case where something leaves your device.</p>
+            <p class="updated" style="margin-top:1rem; color:var(--faint); font-size:0.85rem;">
+                Last updated: <time datetime="2026-07">July 2026</time>
+            </p>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="section">
+            <div class="container">
+                <article class="prose">
+
+                    <h3 style="margin-top:0">1. Summary</h3>
+                    <p>
+                        ImageDB has no account system, no analytics, no telemetry, and no cloud service operated by me.
+                        Your images, thumbnails and metadata are stored in the app's private storage on your own
+                        device. I cannot see your library and have no mechanism to retrieve it.
+                    </p>
+                    <p>
+                        The app is not, however, completely airtight against all network activity. The sections below
+                        describe every case where something leaves your device. Please read section 4 in particular.
+                    </p>
+
+                    <h3>2. Data collection</h3>
+                    <p>
+                        I collect nothing. No personal information, no usage analytics, no crash telemetry, no device
+                        identifiers, no advertising ID gathered by me. There is no server to collect it to.
+                    </p>
+
+                    <h3>3. Device permissions</h3>
+                    <p>
+                        The app requests access to local storage in order to read images you import and to write its
+                        own database and thumbnails. It requests camera access only if you use the hold-to-capture
+                        feature. These permissions exist to make the app function; they are not used to survey your
+                        device.
+                    </p>
+
+                    <h3>4. Network activity</h3>
+                    <p>
+                        ImageDB's core features — importing, tagging, searching, browsing, editing, exporting — work
+                        fully offline. Data leaves your device only in the following cases.
+                    </p>
+
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">4.1 Advertising</h4>
+                    <p>ImageDB shows ads via Google AdMob in two specific places:</p>
+                    <ul>
+                        <li>
+                            <strong>Automatic banner.</strong> A small banner may appear when you proceed to the
+                            advanced, non-essential <strong>Panel Images</strong> combine and preview step. This is the
+                            app's only automatic ad placement. That small amount of income is what funds continued
+                            maintenance.
+                        </li>
+                        <li>
+                            <strong>Rewarded ad.</strong> A separate "support me by watching an ad" button, which only
+                            ever runs when you tap it.
+                        </li>
+                    </ul>
+                    <p>
+                        The rest of the app is ad-free. In both cases AdMob may collect certain device information in
+                        accordance with <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's
+                        Privacy Policy</a>. Ad requests are gated through the platform consent flow where required.
+                        <strong>Your images are never sent to the ad network.</strong>
+                    </p>
+
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">4.2 Linked images</h4>
+                    <p>
+                        If you save an entry as a URL rather than importing the file, ImageDB requests that image from
+                        its source host each time it is displayed. This exposes an ordinary network request —
+                        including your IP address — to that host, exactly as visiting the image in a browser would.
+                        You can convert linked entries to offline copies from Backup &amp; Data.
+                    </p>
+
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">4.3 Android system backup</h4>
+                    <p>
+                        The app sets <code>allowBackup="true"</code> intentionally. If <em>you</em> enable Android's
+                        system backup, the operating system may include eligible ImageDB app-private data in
+                        <em>your</em> backup, stored under your own Google account. I do not enable that setting and do
+                        not operate the backup destination. You can disable it in your device settings.
+                    </p>
+
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">4.4 Actions you take</h4>
+                    <p>
+                        Data also leaves the app whenever you deliberately export it: using the system share sheet,
+                        saving to your phone's gallery, copying to the clipboard, or writing a backup ZIP. Where that
+                        data goes afterwards is determined by the app or destination you chose.
+                    </p>
+
+                    <h3>5. Third-party services</h3>
+                    <p>
+                        Google AdMob, as described in section 4.1, is the only third-party service in the app. There
+                        are no analytics SDKs, no crash reporters, and no social logins. All libraries the app uses
+                        (SQLite/WASM, ZIP, GIF and PDF handling) are bundled inside the app and are not fetched from a
+                        CDN at runtime.
+                    </p>
+
+                    <h3>6. Children</h3>
+                    <p>
+                        ImageDB is not directed at children, and I do not knowingly collect information from anyone —
+                        since I do not collect information at all.
+                    </p>
+
+                    <h3>7. Your data, your responsibility</h3>
+                    <p>
+                        Because there is no cloud copy, uninstalling the app or losing the device means losing the
+                        library. Use the built-in ZIP export to keep your own backups.
+                    </p>
+
+                    <h3>8. Changes to this policy</h3>
+                    <p>
+                        If the app's handling of your data changes, this policy will be updated along with it, and the
+                        date at the top will change.
+                    </p>
+
+                    <h3>9. Contact</h3>
+                    <p>
+                        Questions: <a href="mailto:laplacengan@gmail.com">laplacengan@gmail.com</a>
+                    </p>
+
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h2>ImageDB</h2>
+                    <p>
+                        A local-first image vault. Your images stay on your device — no cloud, no accounts, no uploads.
+                    </p>
                 </div>
+                <ul class="footer-links">
+                    <li><a href="index.html#imagedb">Back to the project</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="mailto:laplacengan@gmail.com">laplacengan@gmail.com</a></li>
+                </ul>
+            </div>
+            <div class="footer-base">
+                <span>© <span id="year">2026</span> Haoxian Yan</span>
             </div>
         </div>
-    </div>
+    </footer>
 
-    <div class="footer">
-        <h2><a href="#header" style="text-decoration: none;">Back to Top</a></h2>
-    </div>
-
+    <script src="site.js" defer></script>
 </body>
-
-<script type="text/javascript" src="indexjs.js"></script>
 
 </html>
