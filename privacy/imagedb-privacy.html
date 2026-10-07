@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ImageDB — Privacy Policy</title>
-    <meta name="description" content="Privacy policy for ImageDB, a local-first image vault. No accounts, no analytics, no cloud service — with every network boundary documented.">
+    <meta name="description" content="Privacy policy for ImageDB, a local-first image library for Android. No account, no ads, no developer-operated cloud — with every case where data leaves your device documented.">
     <meta name="theme-color" content="#fafaf9">
     <meta name="robots" content="index, follow">
 
@@ -49,7 +49,7 @@
             <h1>Privacy Policy</h1>
             <p class="hero-role">What the app does with your data, and every case where something leaves your device.</p>
             <p class="updated" style="margin-top:1rem; color:var(--faint); font-size:0.85rem;">
-                Last updated: <time datetime="2026-07">July 2026</time>
+                Last updated: <time datetime="2026-10-06">6 October 2026</time> · applies to ImageDB 1.4.1 and later
             </p>
         </div>
     </header>
@@ -61,108 +61,130 @@
 
                     <h3 style="margin-top:0">1. Summary</h3>
                     <p>
-                        ImageDB has no account system, no analytics, no telemetry, and no cloud service operated by me.
-                        Your images, thumbnails and metadata are stored in the app's private storage on your own
-                        device. I cannot see your library and have no mechanism to retrieve it.
+                        ImageDB is developed by Haoxian Yan. It has no account system, no ads, no analytics of its own,
+                        and no cloud service operated by me. Your images, thumbnails, captions, albums, tags and other
+                        metadata are stored in the app's private storage on your own device. I cannot see your library
+                        and have no mechanism to retrieve it.
                     </p>
                     <p>
-                        The app is not, however, completely airtight against all network activity. The sections below
-                        describe every case where something leaves your device. Please read section 4 in particular.
+                        Some data does leave your device in specific, documented cases: the optional text-recognition
+                        (OCR) feature uses a Google SDK that sends diagnostic data to Google; purchases go through
+                        Google Play; linked images are fetched from their websites; and copies you choose to share,
+                        export or back up leave the app. Each case is described below.
                     </p>
 
-                    <h3>2. Data collection</h3>
+                    <h3>2. Data I collect</h3>
                     <p>
-                        I collect nothing. No personal information, no usage analytics, no crash telemetry, no device
-                        identifiers, no advertising ID gathered by me. There is no server to collect it to.
+                        I, the developer, do not receive any of your data. There is no ImageDB server. I do not collect
+                        your images, metadata, recognized text, usage analytics, crash reports, advertising ID or contact
+                        details. If you email me, I receive only what you choose to send.
                     </p>
 
-                    <h3>3. Device permissions</h3>
-                    <p>
-                        The app requests access to local storage in order to read images you import and to write its
-                        own database and thumbnails. It requests camera access only if you use the hold-to-capture
-                        feature. These permissions exist to make the app function; they are not used to survey your
-                        device.
-                    </p>
-
-                    <h3>4. Network activity</h3>
-                    <p>
-                        ImageDB's core features — importing, tagging, searching, browsing, editing, exporting — work
-                        fully offline. Data leaves your device only in the following cases.
-                    </p>
-
-                    <h4 style="margin-top:1.5rem; font-size:1rem;">4.1 Advertising</h4>
-                    <p>ImageDB shows ads via Google AdMob in two specific places:</p>
+                    <h3>3. Data stored on your device</h3>
                     <ul>
                         <li>
-                            <strong>Automatic banner.</strong> A small banner may appear when you proceed to the
-                            advanced, non-essential <strong>Panel Images</strong> combine and preview step. This is the
-                            app's only automatic ad placement. That small amount of income is what funds continued
-                            maintenance.
+                            <strong>Your library.</strong> Imported images, generated thumbnails, and the database of
+                            captions, albums, tags, favorites, dates, settings and recognized text live in ImageDB's
+                            app-private storage. Other apps, including your gallery, cannot read them.
                         </li>
                         <li>
-                            <strong>Rewarded ad.</strong> A separate "support me by watching an ad" button, which only
-                            ever runs when you tap it.
+                            <strong>Safe items.</strong> Images and thumbnails you move into Safe are additionally
+                            encrypted with AES-256-GCM. The encryption key is stored with the app's data, so Safe items
+                            survive Android backup and phone transfer. This protects the image files themselves; it
+                            does not protect against someone who has a complete copy of the app's data, key included.
+                            Captions, tags, recognized text and other metadata of Safe items are not encrypted.
+                        </li>
+                        <li>
+                            <strong>Safe and App lock.</strong> These use Android's own fingerprint, face or screen-lock
+                            prompt. ImageDB never sees or stores your biometric data or PIN.
                         </li>
                     </ul>
+
+                    <h3>4. Device permissions</h3>
+                    <ul>
+                        <li><strong>Photos</strong> (<code>READ_MEDIA_IMAGES</code>, selected-photos access, and storage access on Android 10 and older): to import images you pick, and to move an original you choose into the system Trash after importing it.</li>
+                        <li><strong>Biometric</strong>: to show Android's authentication prompt for Safe and App lock.</li>
+                        <li><strong>Internet and network state</strong>: for linked images, OCR model downloads, and Google Play purchases.</li>
+                    </ul>
                     <p>
-                        The rest of the app is ad-free. In both cases AdMob may collect certain device information in
-                        accordance with <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's
-                        Privacy Policy</a>. Ad requests are gated through the platform consent flow where required.
-                        <strong>Your images are never sent to the ad network.</strong>
+                        ImageDB does not request camera, location, contacts, microphone or phone permissions. Taking a
+                        photo opens your device's camera app.
                     </p>
 
-                    <h4 style="margin-top:1.5rem; font-size:1rem;">4.2 Linked images</h4>
+                    <h3>5. When data leaves your device</h3>
+
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">5.1 Text recognition (OCR) — Google ML Kit</h4>
                     <p>
-                        If you save an entry as a URL rather than importing the file, ImageDB requests that image from
-                        its source host each time it is displayed. This exposes an ordinary network request —
-                        including your IP address — to that host, exactly as visiting the image in a browser would.
-                        You can convert linked entries to offline copies from Backup &amp; Data.
+                        Text recognition runs entirely on your device; your images are never uploaded for recognition.
+                        It uses Google's ML Kit through Google Play services, which may download or update the
+                        recognition model for the script you select. As
+                        <a href="https://developers.google.com/ml-kit/android-data-disclosure" target="_blank" rel="noopener">documented by Google</a>,
+                        the ML Kit SDK sends Google the following, over HTTPS, for diagnostics and usage analytics:
+                        device and app information (such as device model, OS and app version), a per-installation
+                        identifier that is not unique to you across apps, performance metrics, API configuration,
+                        feature input/output size, feature version, event type and error codes. Google states it does
+                        not transfer this data to third parties. It is handled under
+                        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
                     </p>
 
-                    <h4 style="margin-top:1.5rem; font-size:1rem;">4.3 Android system backup</h4>
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">5.2 Purchases — Google Play</h4>
                     <p>
-                        The app sets <code>allowBackup="true"</code> intentionally. If <em>you</em> enable Android's
-                        system backup, the operating system may include eligible ImageDB app-private data in
-                        <em>your</em> backup, stored under your own Google account. I do not enable that setting and do
-                        not operate the backup destination. You can disable it in your device settings.
+                        ImageDB shows no ads. Optional Advanced Tools are unlocked by a single one-time purchase
+                        (“buy me a coffee”) processed by Google Play. Google handles payment and receives the purchase,
+                        account and device details it needs under its own privacy policy. The app only asks Google Play
+                        whether the purchase is owned. I never receive your payment information.
                     </p>
 
-                    <h4 style="margin-top:1.5rem; font-size:1rem;">4.4 Actions you take</h4>
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">5.3 Linked images</h4>
                     <p>
-                        Data also leaves the app whenever you deliberately export it: using the system share sheet,
-                        saving to your phone's gallery, copying to the clipboard, or writing a backup ZIP. Where that
-                        data goes afterwards is determined by the app or destination you chose.
+                        If you save an entry as a web address rather than importing the file, ImageDB requests that
+                        image from its source website each time it is displayed. That website sees an ordinary request,
+                        including your IP address, just as it would in a browser. You can convert linked entries to
+                        offline copies from Backup &amp; Data.
                     </p>
 
-                    <h3>5. Third-party services</h3>
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">5.4 Android system backup and device transfer</h4>
                     <p>
-                        Google AdMob, as described in section 4.1, is the only third-party service in the app. There
-                        are no analytics SDKs, no crash reporters, and no social logins. All libraries the app uses
-                        (SQLite/WASM, ZIP, GIF and PDF handling) are bundled inside the app and are not fetched from a
-                        CDN at runtime.
+                        The app allows Android backup. If <em>you</em> enable Android backup or device transfer, Android
+                        may copy ImageDB's app-private data, including the Safe encryption key, to <em>your</em> Google
+                        account or new device. I do not turn this on and do not operate the destination. You can turn it
+                        off in your device settings.
                     </p>
 
-                    <h3>6. Children</h3>
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">5.5 Actions you take</h4>
                     <p>
-                        ImageDB is not directed at children, and I do not knowingly collect information from anyone —
-                        since I do not collect information at all.
+                        Data leaves the app whenever you deliberately share, save to your gallery, copy to the clipboard
+                        or export a backup. Exported ZIP backups are not encrypted and contain decrypted copies of any
+                        Safe images they include; ImageDB warns you before such an export. Where that data goes next is
+                        decided by you and the app or destination you choose.
                     </p>
 
-                    <h3>7. Your data, your responsibility</h3>
+                    <h3>6. Retention and deletion</h3>
                     <p>
-                        Because there is no cloud copy, uninstalling the app or losing the device means losing the
-                        library. Use the built-in ZIP export to keep your own backups.
+                        Your library stays on your device until you delete it. Deleted items go to the in-app Trash and
+                        are permanently removed after 30 days or when you empty it. Uninstalling ImageDB, or clearing its
+                        storage in Android settings, deletes everything stored by the app. Copies you exported, shared,
+                        saved or backed up are outside the app and are not deleted with it. Deletion removes files
+                        through the operating system; it is not a guaranteed secure physical erasure of the storage.
+                        Diagnostic data collected by ML Kit is retained and deleted by Google under its own policies; I
+                        do not hold it and cannot access or delete it.
+                    </p>
+
+                    <h3>7. Children</h3>
+                    <p>
+                        ImageDB is not directed at children under 13 and does not knowingly collect personal information
+                        from children.
                     </p>
 
                     <h3>8. Changes to this policy</h3>
                     <p>
-                        If the app's handling of your data changes, this policy will be updated along with it, and the
+                        If the app's handling of your data changes, this policy will be updated along with it and the
                         date at the top will change.
                     </p>
 
                     <h3>9. Contact</h3>
                     <p>
-                        Questions: <a href="mailto:laplacengan@gmail.com">laplacengan@gmail.com</a>
+                        Haoxian Yan — <a href="mailto:laplacengan@gmail.com">laplacengan@gmail.com</a>
                     </p>
 
                 </article>
@@ -176,7 +198,8 @@
                 <div>
                     <h2>ImageDB</h2>
                     <p>
-                        A local-first image vault. Your images stay on your device — no cloud, no accounts, no uploads.
+                        A local-first image library. Your images stay on your device — no account, no ads, no
+                        developer-operated cloud.
                     </p>
                 </div>
                 <ul class="footer-links">

@@ -313,14 +313,13 @@
                         <ul class="pills" style="margin-top:0">
                             <li class="pill">Android</li>
                             <li class="pill">Web</li>
-                            <li class="pill">v1.2.15</li>
+                            <li class="pill">v1.4.1</li>
                         </ul>
                     </div>
                     <p class="card-sub">Local-first image vault</p>
                     <p class="card-lede">
                         A private, searchable image database where you own every byte. Import images, label them with
-                        captions, albums and free-form tags, then search and browse them completely offline — no
-                        accounts, no cloud, no uploads to third-party servers.
+                        captions, albums and free-form tags, then search and browse them offline — no account, no ads, no developer-operated cloud.
                     </p>
 
                     <div class="accordions">
@@ -350,6 +349,7 @@
                                 <p><strong>Viewing</strong> — responsive grid with XS–XL card sizes and a time-grouped feed. Detail view is a swipeable card with a ghost preview sliding in from the side. Lightbox with scroll, pinch and double-tap zoom plus drag-to-pan.</p>
                                 <p><strong>Editing</strong> — crop canvas with undo stack and animated-GIF output, a GIF editor (speed, frame drop, quality, trim, crop), and a Panel Images combiner with per-image crop and re-grouping.</p>
                                 <p><strong>Data portability</strong> — scoped multi-part ZIP export, merge-safe multi-file import, and a verify-and-repair scan. Trash is a soft delete with 30-day auto-purge.</p>
+                                <p><strong>Search &amp; privacy</strong> — on-device text recognition (OCR) makes words inside screenshots and receipts searchable; a Safe area behind Android's fingerprint/PIN prompt stores its images encrypted (AES-256-GCM); an optional app lock; smart albums.</p>
                                 <p><strong>Other</strong> — multi-select batch operations, an "Organise Quiz" daily tagging challenge with a Library Health score, dark/light theme, multi-language with system auto-detect, and a configurable backup nudge.</p>
                             </div>
                         </details>
@@ -382,7 +382,7 @@
                             <summary>Tech &amp; native plugins</summary>
                             <div class="details-body">
                                 <p><strong>Frontend</strong> — single HTML file, no build step. <code>www/</code> is a generated artefact stamped with the version from <code>package.json</code>.</p>
-                                <p><strong>Native shell</strong> — Capacitor for Android with two custom Java plugins. <strong>ClipboardImagePlugin</strong> writes a full-resolution image to the clipboard as a <code>content://</code> URI backed by FileProvider, so other apps paste actual pixels rather than a data URL. <strong>SharePlugin</strong> captures images shared in from other apps and hands them to JS base64-encoded.</p>
+                                <p><strong>Native shell</strong> — Capacitor for Android with custom Java plugins for clipboard images (a <code>content://</code> URI backed by FileProvider, so other apps paste real pixels), durable share-sheet intake, gallery saving, biometric privacy levels, on-device ML Kit OCR, and Google Play Billing.</p>
                                 <p><strong>Libraries</strong> — sql.js, fflate, gifenc, pdf.js, and the Capacitor filesystem, camera, share, clipboard and app plugins. All bundled; nothing is fetched from a CDN at runtime.</p>
                             </div>
                         </details>
@@ -390,11 +390,12 @@
                         <details>
                             <summary>Privacy &amp; network boundaries</summary>
                             <div class="details-body">
-                                <p><strong>No account, no analytics, no telemetry, no ImageDB-operated sync service.</strong> Originals, thumbnails and metadata live in app-private storage.</p>
-                                <p><strong>Android system backup</strong> — <code>allowBackup</code> is intentionally on. If <em>you</em> enable Android backup, the OS may include eligible ImageDB data in <em>your</em> backup. I do not turn that on and do not operate the destination.</p>
-                                <p><strong>Ads</strong> — proceeding to the advanced, non-essential Panel Images combine step may show one small AdMob banner; that is the only automatic ad placement, and it keeps maintenance funded. A separate rewarded "support me" button is always user-initiated. The rest of the app is ad-free.</p>
+                                <p><strong>No account, no ads, no analytics of my own, no ImageDB-operated sync service.</strong> Originals, thumbnails and metadata live in app-private storage; Safe images and thumbnails are also encrypted at rest.</p>
+                                <p><strong>Text recognition</strong> — OCR runs on the device, but Google's ML Kit SDK sends device/app information, a per-install identifier and performance diagnostics to Google over HTTPS. Google Play services may download recognition models.</p>
+                                <p><strong>Purchases</strong> — the optional one-time Advanced Tools purchase is processed by Google Play; I never see payment details.</p>
+                                <p><strong>Android system backup</strong> — <code>allowBackup</code> is intentionally on. If <em>you</em> enable Android backup, the OS may include ImageDB's data in <em>your</em> backup. I do not turn that on and do not operate the destination.</p>
                                 <p><strong>Linked images</strong> — an entry saved as a URL is fetched from its source host when displayed, exposing a normal network request to that host. You can make linked entries offline from Backup &amp; Data.</p>
-                                <p>In short, data leaves the vault only when you invoke an OS share/save action, export a backup, follow a linked image, enable Android system backup, or enter the ad-supported Panel Images step.</p>
+                                <p>In short, data leaves the app only through OCR diagnostics, Play purchases, linked images, Android backup you enable, or a share/save/export you start.</p>
                             </div>
                         </details>
                     </div>
