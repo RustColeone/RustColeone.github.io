@@ -29,11 +29,12 @@ The page is deliberately explicit that the software projects dominate it only be
 | `privacy/neurocamp-privacy.html` | NeuroCamp privacy policy |
 | `styles.css` | All styling |
 | `site.js` | Theme toggle, nav highlighting, print handling |
+| `images/` | Bio portrait, research and collaborator images, classroom photo gallery |
 | `directory.json` | Unused sample data from an earlier auto-generation idea |
 
 ## Implementation notes
 
-Plain HTML, CSS and JavaScript. No build step, no dependencies, no external requests — no CDNs, no web fonts, no analytics. Everything needed to render the site is in the four files above.
+Plain HTML, CSS and JavaScript with local image assets. No build step, no dependencies, no external requests — no CDNs, no web fonts, no analytics. Photos include descriptive alternative text and explicit dimensions; images below the introduction load lazily. Click a research or gallery image to view the original at full size.
 
 **Theming.** The palette is declared once using the CSS `light-dark()` function against `color-scheme`. Switching themes only flips `color-scheme` on `:root`, so there is no duplicated dark-mode token block and no JavaScript walking the DOM to restyle elements. With JavaScript disabled the site still follows the OS preference; the toggle just adds an explicit override, remembered in `localStorage`. A tiny inline script in `<head>` applies the stored choice before first paint to avoid a flash.
 

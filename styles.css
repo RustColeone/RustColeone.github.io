@@ -310,6 +310,64 @@ code {
     letter-spacing: -0.025em;
 }
 
+.hero .container {
+    display: flow-root;
+}
+
+.hero-portrait {
+    float: right;
+    width: clamp(10rem, 24vw, 16rem);
+    height: auto;
+    margin: 0 0 1.5rem 2rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+/* ---------- Photography ---------- */
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    gap: 1.75rem 1.25rem;
+}
+
+.photo-grid figure {
+    min-width: 0;
+}
+
+.photo-grid img,
+.research-photo img,
+.collaborator-photo img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+figcaption {
+    margin-top: 0.65rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+}
+
+.research-photo {
+    max-width: 44rem;
+    margin-top: 1.75rem;
+}
+
+.collaborator-photo {
+    max-width: 26rem;
+    margin-top: 1.25rem;
+}
+
+@media (max-width: 40rem) {
+    .hero-portrait {
+        float: none;
+        width: 11rem;
+        margin: 0 0 1.5rem;
+    }
+}
+
 .hero-role {
     margin-top: 0.85rem;
     font-size: clamp(1.05rem, 2.2vw, 1.2rem);
