@@ -46,11 +46,11 @@
 
     <header class="hero">
         <div class="container">
-            <span class="eyebrow">ImageDB</span>
-            <h1>Privacy Policy</h1>
+            <span class="eyebrow">Privacy</span>
+            <h1>ImageDB Privacy Policy</h1>
             <p class="hero-role">What the app does with your data, and every case where something leaves your device.</p>
             <p class="updated" style="margin-top:1rem; color:var(--faint); font-size:0.85rem;">
-                Last updated: <time datetime="2026-10-06">6 October 2026</time> · applies to ImageDB 1.4.1 and later
+                Last updated: <time datetime="2026-10-22">22 October 2026</time> · applies to ImageDB 2.1 and later
             </p>
         </div>
     </header>
@@ -68,10 +68,11 @@
                         and have no mechanism to retrieve it.
                     </p>
                     <p>
-                        Some data does leave your device in specific, documented cases: the optional text-recognition
-                        (OCR) feature uses a Google SDK that sends diagnostic data to Google; purchases go through
-                        Google Play; linked images are fetched from their websites; and copies you choose to share,
-                        export or back up leave the app. Each case is described below.
+                        Some data does leave your device in specific, documented cases: the on-device recognition
+                        features (text recognition, Auto-organize and the image tools) use Google ML Kit, whose SDK
+                        sends diagnostic data to Google; purchases go through Google Play; linked images are fetched
+                        from their websites; and copies you choose to share, export or back up leave the app. Each case
+                        is described below.
                     </p>
 
                     <h3>2. Data I collect</h3>
@@ -96,6 +97,13 @@
                             Captions, tags, recognized text and other metadata of Safe items are not encrypted.
                         </li>
                         <li>
+                            <strong>Auto-organize results.</strong> Auto-organize (on by default; you can turn it off)
+                            stores, for each image, object and scene labels with confidence scores, the number of faces
+                            and the size of the largest face, and an image embedding used to find similar images. It
+                            never identifies who a person is and creates no face templates. These results are stored
+                            unencrypted, are not included in exported backups, and can be cleared in Auto-organize.
+                        </li>
+                        <li>
                             <strong>Safe and App lock.</strong> These use Android's own fingerprint, face or screen-lock
                             prompt. ImageDB never sees or stores your biometric data or PIN.
                         </li>
@@ -105,7 +113,7 @@
                     <ul>
                         <li><strong>Photos</strong> (<code>READ_MEDIA_IMAGES</code>, selected-photos access, and storage access on Android 10 and older): to import images you pick, and to move an original you choose into the system Trash after importing it.</li>
                         <li><strong>Biometric</strong>: to show Android's authentication prompt for Safe and App lock.</li>
-                        <li><strong>Internet and network state</strong>: for linked images, OCR model downloads, and Google Play purchases.</li>
+                        <li><strong>Internet and network state</strong>: for linked images, downloads of on-device recognition models and translation language packs, and Google Play purchases.</li>
                     </ul>
                     <p>
                         ImageDB does not request camera, location, contacts, microphone or phone permissions. Taking a
@@ -114,11 +122,20 @@
 
                     <h3>5. When data leaves your device</h3>
 
-                    <h4 style="margin-top:1.5rem; font-size:1rem;">5.1 Text recognition (OCR) — Google ML Kit</h4>
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">5.1 On-device recognition — Google ML Kit</h4>
                     <p>
-                        Text recognition runs entirely on your device; your images are never uploaded for recognition.
-                        It uses Google's ML Kit through Google Play services, which may download or update the
-                        recognition model for the script you select. As
+                        These features analyze your images on your device; your images are never uploaded for
+                        analysis:
+                    </p>
+                    <ul>
+                        <li><strong>Text recognition (OCR)</strong>, which makes text inside images searchable. Recognized text is stored with your library.</li>
+                        <li><strong>Auto-organize</strong>: image labeling, face detection (counting faces, not recognizing people) and an image-embedding model run by Google Play services, as described in section 3.</li>
+                        <li><strong>Image tools</strong>: barcode and QR code reading, Remove background (subject segmentation), Privacy blur and Scan document (face and text detection), and translation. ImageDB stores only whether an image contains a code, never the code's content. Translated text is not sent anywhere and is not stored. A tool's result is saved only when you choose to save it, as a new image.</li>
+                        <li><strong>Scan documents</strong> opens Google's document scanner from Google Play services; ImageDB receives only the pages you keep.</li>
+                    </ul>
+                    <p>
+                        Google Play services downloads and updates the recognition models, and translation language
+                        packs are downloaded from Google once per language. As
                         <a href="https://developers.google.com/ml-kit/android-data-disclosure" target="_blank" rel="noopener">documented by Google</a>,
                         the ML Kit SDK sends Google the following, over HTTPS, for diagnostics and usage analytics:
                         device and app information (such as device model, OS and app version), a per-installation
@@ -155,15 +172,19 @@
                     <h4 style="margin-top:1.5rem; font-size:1rem;">5.5 Actions you take</h4>
                     <p>
                         Data leaves the app whenever you deliberately share, save to your gallery, copy to the clipboard
-                        or export a backup. Exported ZIP backups are not encrypted and contain decrypted copies of any
-                        Safe images they include; ImageDB warns you before such an export. Where that data goes next is
-                        decided by you and the app or destination you choose.
+                        or export a backup. Every exported backup is encrypted (AES-256-GCM) with a password you choose;
+                        ImageDB does not keep the password. A backup contains any Safe images you include, so anyone
+                        who has the backup file and its password can open them; ImageDB warns you before such an
+                        export. Backups made by versions before 2.1 were unencrypted ZIP files and can still be
+                        restored. When you share an image, ImageDB may offer to blur faces or text first. Where shared
+                        or exported data goes next is decided by you and the app or destination you choose.
                     </p>
 
                     <h3>6. Retention and deletion</h3>
                     <p>
                         Your library stays on your device until you delete it. Deleted items go to the in-app Trash and
-                        are permanently removed after 30 days or when you empty it. Uninstalling ImageDB, or clearing its
+                        are permanently removed after 30 days or when you empty it. Auto-organize results can be cleared
+                        at any time, and turning Auto-organize off stops further analysis. Uninstalling ImageDB, or clearing its
                         storage in Android settings, deletes everything stored by the app. Copies you exported, shared,
                         saved or backed up are outside the app and are not deleted with it. Deletion removes files
                         through the operating system; it is not a guaranteed secure physical erasure of the storage.
