@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Memora — Privacy Policy</title>
-    <meta name="description" content="Privacy policy for Memora, a self-hosted memo, finance and planner database. No Memora cloud, no accounts with me, no analytics — your server, your data.">
+    <meta name="description" content="Privacy policy for Memora: memos, finances and plans kept on your device, with optional sync to a server you choose and optional AI with your own key.">
     <meta name="theme-color" content="#fafaf9">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://rustcoleone.github.io/privacy/memora/">
@@ -46,11 +46,11 @@
 
     <header class="hero">
         <div class="container">
-            <span class="eyebrow">Memora</span>
-            <h1>Privacy Policy</h1>
-            <p class="hero-role">Short version: there is no Memora cloud. The server is yours, the data is yours, and the app talks only to the address you type in.</p>
+            <span class="eyebrow">Privacy</span>
+            <h1>Memora Privacy Policy</h1>
+            <p class="hero-role">Short version: your notebook stays on your device. There is no Memora cloud; sync goes only to a server you choose, and AI only to a provider you choose with your own key.</p>
             <p class="updated" style="margin-top:1rem; color:var(--faint); font-size:0.85rem;">
-                Last updated: <time datetime="2026-07">July 2026</time>
+                Last updated: <time datetime="2026-10-22">22 October 2026</time> · applies to the Memora Android app 0.0.14 and later
             </p>
         </div>
     </header>
@@ -62,115 +62,172 @@
 
                     <h3 style="margin-top:0">1. Summary</h3>
                     <p>
-                        Memora is two halves: a Flask server <em>you</em> host, and an Android client that connects to
-                        it. All of your memos, receipts, finances and planner entries live on hardware you own. I do
-                        not operate a server for this app, cannot see your data, and have no mechanism to retrieve it.
+                        Memora is developed by Haoxian Yan. It keeps your memos, finances and plans on your own device.
+                        It has no account system, no ads, no analytics and no cloud service operated by me. I cannot see
+                        your notebook and have no mechanism to retrieve it.
                     </p>
                     <p>
-                        Because you run the server, you are the one holding the data — which also makes its security
-                        and its backups your responsibility. Sections 4 and 7 cover the two places that matters most.
+                        Data leaves your device only in specific, documented cases: sync, if you connect a server you
+                        choose; AI features, if you add your own key for a provider you choose; on-device recognition
+                        features that use Google ML Kit, whose SDK sends diagnostic data to Google; Android's own backup,
+                        if you have it turned on; and copies you choose to share or export. Each case is described below.
                     </p>
 
-                    <h3>2. Data collection</h3>
+                    <h3>2. Data I collect</h3>
                     <p>
-                        I collect nothing. No personal information, no usage analytics, no crash telemetry, no device
-                        identifiers, no advertising identifiers. There is no service of mine for the app to report to.
-                    </p>
-                    <p>
-                        There is also <strong>no advertising in Memora</strong> — no ad SDK, no banner, no rewarded
-                        video. That is a deliberate difference from ImageDB, which is partly ad-supported.
+                        I, the developer, do not receive any of your data. I do not collect your entries, images,
+                        files, usage analytics, crash reports, advertising ID or contact details. If you email me, I
+                        receive only what you choose to send.
                     </p>
 
-                    <h3>3. Where your data lives</h3>
+                    <h3>3. Data stored on your device</h3>
+                    <ul>
+                        <li>
+                            <strong>Your notebook.</strong> Memos, finance records, planner entries and settings live in
+                            Memora's app-private storage. On Android they are kept in a database encrypted with
+                            SQLCipher; its key is held in Android's Keystore-backed storage and never leaves the phone.
+                            Images and files you attach are stored in the same private storage as ordinary files and are
+                            not encrypted.
+                        </li>
+                        <li>
+                            <strong>Vault.</strong> Secure notes and AI keys in the Vault are encrypted with AES-256-GCM
+                            under your vault password (on a phone, your fingerprint can unlock it too). A working copy of
+                            your AI keys stays inside the encrypted app database, so AI features work while the Vault is
+                            locked.
+                        </li>
+                        <li>
+                            <strong>Auto-organize results.</strong> Auto-organize (on by default; you can turn it off)
+                            stores, for each image, object and scene labels, the number of faces and of QR codes or
+                            barcodes, and an image embedding used to find similar images. It never identifies who a
+                            person is and creates no face templates. These results are never synced or backed up, and
+                            nothing is applied to an entry until you tap a suggestion.
+                        </li>
+                        <li>
+                            <strong>Reminders.</strong> Planner reminders are scheduled as notifications on the device
+                            itself.
+                        </li>
+                        <li>
+                            <strong>App lock.</strong> Locking a page or Safe entries uses Android's fingerprint, face or
+                            screen-lock prompt. Memora never sees or stores your biometric data or PIN.
+                        </li>
+                    </ul>
+
+                    <h3>4. Device permissions</h3>
+                    <ul>
+                        <li><strong>Internet and network state</strong>: for sync with the server you connect, AI requests to the provider you choose, and downloads of on-device recognition models and translation language packs.</li>
+                        <li><strong>Notifications and run at startup</strong>: to show planner reminders, and to schedule them again after the phone restarts.</li>
+                        <li><strong>Biometric</strong>: to show Android's authentication prompt for App lock and the Vault.</li>
+                    </ul>
                     <p>
-                        The server stores everything on the machine you run it on: JSON document stores and SQLite
-                        databases under its <code>data/</code> directory, and any files or receipt images you upload
-                        under <code>uploads/</code>. These are ordinary files you can read, copy and delete yourself.
-                    </p>
-                    <p>
-                        The Android client keeps a local working copy plus the connection settings you entered, in its
-                        own app-private storage. Client and server reconcile through an operation log: the app pushes
-                        the operations you made and pulls those it has not seen. That log describes your own entries
-                        and travels only between your phone and your server.
+                        Memora does not request camera, photos, location, contacts or microphone permissions. You pick
+                        images with Android's photo picker, and taking a photo opens your camera app. Scanning a code or a
+                        document uses Google's scanner from Google Play services, which handles the camera itself;
+                        Memora receives only the result. Files you share into Memora from another app open as a new
+                        memo.
                     </p>
 
-                    <h3>4. Network activity</h3>
+                    <h3>5. When data leaves your device</h3>
+
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">5.1 Sync (optional)</h4>
                     <p>
-                        The app makes network requests to exactly one place by default: the server address you
-                        configure. Nothing is sent anywhere else unless you turn on the optional AI features in
-                        section 5.
+                        Sync is off until you connect a server. Memora then copies your data only to the server address
+                        you enter, such as a server you host yourself or the one built into the Memora desktop app,
+                        protected by a sync password you set. Vault items travel only as ciphertext. The server stores
+                        your data on the machine it runs on; I do not host, monitor or receive anything from it.
+                    </p>
+                    <p>
+                        The Android app allows plain <code>http://</code> connections, because most people self-host on
+                        a home network without a TLS certificate. <strong>Over plain HTTP, anyone able to observe your
+                        network can read the traffic between the app and your server.</strong> On a network you do not
+                        trust, use HTTPS or a VPN. If you make your server reachable from the internet, securing it is
+                        up to you.
                     </p>
 
-                    <h4 style="margin-top:1.5rem; font-size:1rem;">4.1 Cleartext HTTP is permitted</h4>
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">5.2 AI features (bring your own key)</h4>
                     <p>
-                        The Android client allows plain <code>http://</code> connections, deliberately, because most
-                        people self-host over a home LAN without a TLS certificate. This is a real trade-off and worth
-                        stating plainly: <strong>over plain HTTP, anyone able to observe your network can read the
-                        traffic between the app and your server.</strong> On a network you do not trust, put the server
-                        behind HTTPS or reach it over a VPN rather than exposing it directly.
+                        Memora has no AI service of its own and includes no AI key. Photo analysis and AI chats are off
+                        until you add your own API key in the Vault, for OpenAI, Google Gemini, DeepSeek, Anthropic
+                        Claude or another compatible service you enter, or use the AI configured on your own sync
+                        server. Then the text and images you send, and the records an AI contact is allowed to read,
+                        go to that provider under its own privacy policy and terms. I am not an intermediary and never
+                        receive a copy. Nothing an AI suggests is saved until you tap it.
                     </p>
 
-                    <h4 style="margin-top:1.5rem; font-size:1rem;">4.2 Exposing your server</h4>
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">5.3 On-device recognition — Google ML Kit</h4>
                     <p>
-                        If you make your server reachable from the public internet, it is your deployment to secure.
-                        I do not host it, monitor it, or receive any notification about it.
+                        These Android features analyze your images on your device; your images are never uploaded for
+                        analysis:
+                    </p>
+                    <ul>
+                        <li><strong>Text recognition (OCR)</strong>, which makes text inside images searchable.</li>
+                        <li><strong>Auto-organize</strong>: image labeling, face detection (counting faces, not recognizing people), code detection and an image-embedding model run by Google Play services, as described in section 3.</li>
+                        <li><strong>Image tools</strong>: barcode and QR code reading, Remove background (subject segmentation), Privacy blur (face and text detection), Scan document, language identification and translation. Translated text is not sent anywhere. A tool's result is saved only when you choose to save it.</li>
+                        <li><strong>Scanners</strong>: Google's code scanner and document scanner from Google Play services.</li>
+                    </ul>
+                    <p>
+                        Google Play services downloads and updates the recognition models, and translation language
+                        packs are downloaded from Google once per language. As
+                        <a href="https://developers.google.com/ml-kit/android-data-disclosure" target="_blank" rel="noopener">documented by Google</a>,
+                        the ML Kit SDK sends Google the following, over HTTPS, for diagnostics and usage analytics:
+                        device and app information (such as device model, OS and app version), a per-installation
+                        identifier that is not unique to you across apps, performance metrics, API configuration,
+                        feature input/output size, feature version, event type and error codes. Google states it does
+                        not transfer this data to third parties. It is handled under
+                        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
                     </p>
 
-                    <h3>5. Optional AI features (bring your own key)</h3>
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">5.4 Android system backup and device transfer</h4>
                     <p>
-                        Memora includes optional AI features — chat, OCR-assisted entry, and image analysis that can
-                        create entries from an uploaded photo. These are <strong>off unless you configure them</strong>,
-                        and they use <em>your</em> API key with whichever provider you choose: OpenAI, Google Gemini or
-                        DeepSeek.
-                    </p>
-                    <p>
-                        When you use one of those features, the content you submit — the text, or the image you asked
-                        it to read — is sent to that provider and handled under <em>their</em> privacy policy and
-                        terms, not mine. I am not an intermediary in that exchange and never receive a copy. Consider
-                        this before pointing an AI feature at a sensitive receipt or note.
-                    </p>
-                    <p>
-                        Leave the key unset and these features stay off. Everything else in Memora — capture, finance,
-                        planner, sync — works with no key at all.
+                        The app allows Android backup. If <em>you</em> enable Android backup or device transfer, Android
+                        may copy Memora's app-private data to <em>your</em> Google account or new device. The database key
+                        is never included, so the entries in that copy open on another phone only with the recovery
+                        password you set in Backup &amp; Data. Images and files are copied as they are. I do not turn
+                        this on and do not operate the destination. You can turn it off in your device settings.
                     </p>
 
-                    <h3>6. Device permissions</h3>
+                    <h4 style="margin-top:1.5rem; font-size:1rem;">5.5 Actions you take</h4>
                     <p>
-                        The client requests network access in order to reach your server. If you attach a photo or
-                        capture a receipt, it requests the relevant camera or media access at that point. These
-                        permissions exist to make those features work; they are not used to survey your device.
+                        Data leaves the app whenever you deliberately share, copy or export it. Backups you export from
+                        the app are encrypted (AES-256-GCM) with a password you choose; Memora does not keep it and
+                        cannot recover a forgotten password. While Memora is connected to your sync server, Export
+                        instead downloads your server's backup as an unencrypted ZIP. When you share an image, Memora
+                        may offer to blur faces or text first. Where shared or exported data goes next is decided by you
+                        and the app or destination you choose.
                     </p>
 
-                    <h3>7. Backups are yours</h3>
+                    <h3>6. Retention and deletion</h3>
                     <p>
-                        Your data directories never leave your machine on their own — which also means nobody else is
-                        making backups for you. If the machine running the server dies without a backup, the data goes
-                        with it. Copy <code>data/</code> and <code>uploads/</code> somewhere safe on whatever schedule
-                        suits you.
+                        Your notebook stays on your device until you delete it. Deleted entries go to the Recycle Bin and
+                        are permanently removed after 30 days. Uninstalling Memora, or clearing its storage in Android
+                        settings, deletes everything stored by the app. Copies on your sync server, and backups or files
+                        you exported or shared, are outside the app and are not deleted with it. Auto-organize results
+                        can be cleared at any time. Diagnostic data collected by ML Kit, and anything you sent to an AI
+                        provider, is retained and deleted by Google or that provider under its own policies; I do not
+                        hold it and cannot access or delete it.
                     </p>
 
-                    <h3>8. Third-party services</h3>
+                    <h3>7. Third-party services</h3>
                     <p>
-                        None are contacted by default. The only external services Memora can ever reach are the AI
-                        providers described in section 5, and only after you supply a key for one. There are no
-                        analytics SDKs, no crash reporters, no social logins, and no ad networks.
+                        Google ML Kit and Google Play services, as described in section 5.3, and the AI provider you
+                        choose, only after you add a key. There are no analytics SDKs, crash reporters, social logins,
+                        ad networks or in-app purchases.
                     </p>
 
-                    <h3>9. Children</h3>
+                    <h3>8. Children</h3>
                     <p>
-                        Memora is not directed at children, and I do not knowingly collect information from anyone —
-                        since I do not collect information at all.
+                        Memora is not directed at children under 13 and does not knowingly collect personal information
+                        from children.
                     </p>
 
-                    <h3>10. Changes to this policy</h3>
+                    <h3>9. Changes to this policy</h3>
                     <p>
                         If the app's handling of your data changes, this policy will be updated along with it, and the
                         date at the top will change.
                     </p>
 
-                    <h3>11. Contact</h3>
+                    <h3>10. Contact</h3>
                     <p>
-                        Questions: <a href="mailto:laplacengan@gmail.com">laplacengan@gmail.com</a>
+                        Haoxian Yan — <a href="mailto:laplacengan@gmail.com">laplacengan@gmail.com</a>
                     </p>
 
                 </article>
