@@ -24,13 +24,21 @@ The page is deliberately explicit that the software projects dominate it only be
 | File | Purpose |
 |---|---|
 | `index.html` | Main page |
-| `privacy/imagedb-privacy.html` | ImageDB privacy policy |
-| `privacy/memora-privacy.html` | Memora privacy policy |
-| `privacy/neurocamp-privacy.html` | NeuroCamp privacy policy |
+| `privacy/index.html` | List of the app privacy policies |
+| `privacy/imagedb/index.html` | ImageDB privacy policy — https://rustcoleone.github.io/privacy/imagedb/ |
+| `privacy/memora/index.html` | Memora privacy policy — https://rustcoleone.github.io/privacy/memora/ |
+| `privacy/neurocamp/index.html` | NeuroCamp privacy policy — https://rustcoleone.github.io/privacy/neurocamp/ |
+| `privacy/<app>-privacy.html` | Older address of each policy, kept as an identical copy |
 | `styles.css` | All styling |
 | `site.js` | Theme toggle, nav highlighting, print handling |
 | `images/` | Bio portrait, research and collaborator images, classroom photo gallery |
 | `directory.json` | Unused sample data from an earlier auto-generation idea |
+
+## Privacy policy addresses
+
+Each app's policy is its own page at `/privacy/<app>/`; that is the address to give Google Play (with the trailing slash). The page is the policy itself, with no redirect or homepage in between.
+
+The older `/privacy/<app>-privacy.html` addresses stay live because released app versions and store listings link to them. They are full copies, not redirects, and both point search engines at the folder address. The pages use root-absolute links (`/styles.css`), so the two files are identical: edit `privacy/<app>/index.html`, then copy it over the old file, for example `cp privacy/imagedb/index.html privacy/imagedb-privacy.html`.
 
 ## Implementation notes
 
